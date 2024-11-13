@@ -228,5 +228,68 @@
       <Name>GMapUtil</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dji.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DJI Mavic Pro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\无人机.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\地图测距.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\绘制多段线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\多边形.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\提取.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\merge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\organize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\转换.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\卫星地图.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view-column.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除全部.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iov-position.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
