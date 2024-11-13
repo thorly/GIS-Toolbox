@@ -1,30 +1,22 @@
-﻿using GMap.NET;
-using GMapUtil;
-using SharpKml.Base;
+﻿using SharpKml.Base;
 using SharpKml.Dom;
 using SharpKml.Engine;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Geometry = SharpKml.Dom.Geometry;
 using Placemark = SharpKml.Dom.Placemark;
 using Point = SharpKml.Dom.Point;
 
 namespace GIS_Toolbox
 {
-	public partial class ll2kmlForm : Form
+	public partial class LL2kmlForm : Form
 	{
 		private string fileName = "";
 
-		public ll2kmlForm()
+		public LL2kmlForm()
 		{
 			InitializeComponent();
 
@@ -186,8 +178,8 @@ namespace GIS_Toolbox
 					}
 					else
 					{
-						lat = MainForm.ConvertDMSToDecimalDegree(latString);
-						lng = MainForm.ConvertDMSToDecimalDegree(lngString);
+						lat = Tools.ConvertDMSToDecimalDegree(latString);
+						lng = Tools.ConvertDMSToDecimalDegree(lngString);
 					}
 
 					Placemark feature = new Placemark();

@@ -42,9 +42,9 @@
 			this.textBoxColumnNum = new System.Windows.Forms.TextBox();
 			this.buttonExport = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.checkBoxSkip = new System.Windows.Forms.CheckBox();
-			this.comboBoxSeparator = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.comboBoxSeparator = new System.Windows.Forms.ComboBox();
+			this.checkBoxSkip = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
 			this.groupBox.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -186,15 +186,14 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "导出设置";
 			// 
-			// checkBoxSkip
+			// label3
 			// 
-			this.checkBoxSkip.AutoSize = true;
-			this.checkBoxSkip.Location = new System.Drawing.Point(274, 42);
-			this.checkBoxSkip.Name = "checkBoxSkip";
-			this.checkBoxSkip.Size = new System.Drawing.Size(106, 22);
-			this.checkBoxSkip.TabIndex = 6;
-			this.checkBoxSkip.Text = "跳过首行";
-			this.checkBoxSkip.UseVisualStyleBackColor = true;
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(386, 44);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(80, 18);
+			this.label3.TabIndex = 2;
+			this.label3.Text = "分隔符：";
 			// 
 			// comboBoxSeparator
 			// 
@@ -204,14 +203,15 @@
 			this.comboBoxSeparator.Size = new System.Drawing.Size(121, 26);
 			this.comboBoxSeparator.TabIndex = 7;
 			// 
-			// label3
+			// checkBoxSkip
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(386, 44);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(80, 18);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "分隔符：";
+			this.checkBoxSkip.AutoSize = true;
+			this.checkBoxSkip.Location = new System.Drawing.Point(274, 42);
+			this.checkBoxSkip.Name = "checkBoxSkip";
+			this.checkBoxSkip.Size = new System.Drawing.Size(106, 22);
+			this.checkBoxSkip.TabIndex = 6;
+			this.checkBoxSkip.Text = "跳过首行";
+			this.checkBoxSkip.UseVisualStyleBackColor = true;
 			// 
 			// ExtractColumnForm
 			// 

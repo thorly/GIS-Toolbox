@@ -1,6 +1,6 @@
 ﻿namespace GIS_Toolbox
 {
-	partial class ll2kmlForm
+	partial class LL2kmlForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,15 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ll2kmlForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LL2kmlForm));
 			this.dataGridView = new System.Windows.Forms.DataGridView();
 			this.buttonImportFile = new System.Windows.Forms.Button();
 			this.groupBoxSeparator = new System.Windows.Forms.GroupBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.textBoxOther = new System.Windows.Forms.TextBox();
+			this.radioButtonOther = new System.Windows.Forms.RadioButton();
 			this.radioButtonTab = new System.Windows.Forms.RadioButton();
 			this.radioButtonSemicolon = new System.Windows.Forms.RadioButton();
 			this.radioButtonSpace = new System.Windows.Forms.RadioButton();
 			this.radioButtonComma = new System.Windows.Forms.RadioButton();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.buttonExportKml = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.checkBoxSkipFirstLine = new System.Windows.Forms.CheckBox();
 			this.comboBoxLat = new System.Windows.Forms.ComboBox();
@@ -44,10 +48,6 @@
 			this.comboBoxName = new System.Windows.Forms.ComboBox();
 			this.comboBoxLng = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.buttonExportKml = new System.Windows.Forms.Button();
-			this.radioButtonOther = new System.Windows.Forms.RadioButton();
-			this.textBoxOther = new System.Windows.Forms.TextBox();
-			this.label4 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
 			this.groupBoxSeparator.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -89,6 +89,34 @@
 			this.groupBoxSeparator.TabIndex = 2;
 			this.groupBoxSeparator.TabStop = false;
 			this.groupBoxSeparator.Text = "导入设置";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(192, 43);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(80, 18);
+			this.label4.TabIndex = 4;
+			this.label4.Text = "分隔符：";
+			// 
+			// textBoxOther
+			// 
+			this.textBoxOther.Location = new System.Drawing.Point(728, 37);
+			this.textBoxOther.MaxLength = 1;
+			this.textBoxOther.Name = "textBoxOther";
+			this.textBoxOther.Size = new System.Drawing.Size(100, 28);
+			this.textBoxOther.TabIndex = 3;
+			// 
+			// radioButtonOther
+			// 
+			this.radioButtonOther.AutoSize = true;
+			this.radioButtonOther.Location = new System.Drawing.Point(644, 41);
+			this.radioButtonOther.Name = "radioButtonOther";
+			this.radioButtonOther.Size = new System.Drawing.Size(69, 22);
+			this.radioButtonOther.TabIndex = 2;
+			this.radioButtonOther.TabStop = true;
+			this.radioButtonOther.Text = "其他";
+			this.radioButtonOther.UseVisualStyleBackColor = true;
 			// 
 			// radioButtonTab
 			// 
@@ -151,6 +179,16 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "导出设置";
 			// 
+			// buttonExportKml
+			// 
+			this.buttonExportKml.Location = new System.Drawing.Point(687, 33);
+			this.buttonExportKml.Name = "buttonExportKml";
+			this.buttonExportKml.Size = new System.Drawing.Size(141, 38);
+			this.buttonExportKml.TabIndex = 4;
+			this.buttonExportKml.Text = "导出kml文件";
+			this.buttonExportKml.UseVisualStyleBackColor = true;
+			this.buttonExportKml.Click += new System.EventHandler(this.buttonExportKml_Click);
+			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
@@ -212,45 +250,7 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "经度：";
 			// 
-			// buttonExportKml
-			// 
-			this.buttonExportKml.Location = new System.Drawing.Point(687, 33);
-			this.buttonExportKml.Name = "buttonExportKml";
-			this.buttonExportKml.Size = new System.Drawing.Size(141, 38);
-			this.buttonExportKml.TabIndex = 4;
-			this.buttonExportKml.Text = "导出kml文件";
-			this.buttonExportKml.UseVisualStyleBackColor = true;
-			this.buttonExportKml.Click += new System.EventHandler(this.buttonExportKml_Click);
-			// 
-			// radioButtonOther
-			// 
-			this.radioButtonOther.AutoSize = true;
-			this.radioButtonOther.Location = new System.Drawing.Point(644, 41);
-			this.radioButtonOther.Name = "radioButtonOther";
-			this.radioButtonOther.Size = new System.Drawing.Size(69, 22);
-			this.radioButtonOther.TabIndex = 2;
-			this.radioButtonOther.TabStop = true;
-			this.radioButtonOther.Text = "其他";
-			this.radioButtonOther.UseVisualStyleBackColor = true;
-			// 
-			// textBoxOther
-			// 
-			this.textBoxOther.Location = new System.Drawing.Point(728, 37);
-			this.textBoxOther.MaxLength = 1;
-			this.textBoxOther.Name = "textBoxOther";
-			this.textBoxOther.Size = new System.Drawing.Size(100, 28);
-			this.textBoxOther.TabIndex = 3;
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(192, 43);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(80, 18);
-			this.label4.TabIndex = 4;
-			this.label4.Text = "分隔符：";
-			// 
-			// ll2kmlForm
+			// LL2kmlForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -262,7 +262,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "ll2kmlForm";
+			this.Name = "LL2kmlForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "经纬度转kml";
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

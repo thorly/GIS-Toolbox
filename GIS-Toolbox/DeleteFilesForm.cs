@@ -62,12 +62,14 @@ namespace GIS_Toolbox
 
 		private void buttonOpenDir_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog dialog = new FolderBrowserDialog();
-			dialog.Description = "请选择文件夹";
-			dialog.RootFolder = Environment.SpecialFolder.MyComputer;
-			if (dialog.ShowDialog() == DialogResult.OK)
+			FolderSelectDialogSingle.FolderSelectDialogSingle dialog = new FolderSelectDialogSingle.FolderSelectDialogSingle
 			{
-				textBoxDirectory.Text = dialog.SelectedPath;
+				Title = "选择文件夹"
+			};
+
+			if (dialog.ShowDialog(this.Handle))
+			{
+				textBoxDirectory.Text = dialog.FileName;
 			}
 		}
 	}

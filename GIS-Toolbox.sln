@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapMarkerLib", "GMapMarker
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GIS-ToolboxSetup", "GIS-ToolboxSetup\GIS-ToolboxSetup.vdproj", "{A0B8D4B5-943E-4489-BB79-3005F7B05C91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapTools", "GMapTools\GMapTools.csproj", "{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,14 @@ Global
 		{A0B8D4B5-943E-4489-BB79-3005F7B05C91}.Release|Any CPU.ActiveCfg = Release
 		{A0B8D4B5-943E-4489-BB79-3005F7B05C91}.v4.0-Debug|Any CPU.ActiveCfg = Debug
 		{A0B8D4B5-943E-4489-BB79-3005F7B05C91}.v4.0-Release|Any CPU.ActiveCfg = Release
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.v4.0-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.v4.0-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.v4.0-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}.v4.0-Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

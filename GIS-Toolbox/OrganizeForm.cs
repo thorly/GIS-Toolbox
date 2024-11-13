@@ -82,27 +82,27 @@ namespace GIS_Toolbox
 
 		private void buttonInput_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog folder = new FolderBrowserDialog();
-			folder.Description = "选择文件夹目录";
-			folder.ShowNewFolderButton = false;
-			folder.RootFolder = Environment.SpecialFolder.MyComputer;
-
-			if (folder.ShowDialog() == DialogResult.OK)
+			FolderSelectDialogSingle.FolderSelectDialogSingle dialog = new FolderSelectDialogSingle.FolderSelectDialogSingle
 			{
-				textBoxInput.Text = folder.SelectedPath;
-			}
+				Title = "选择文件夹"
+			};
 
+			if (dialog.ShowDialog(this.Handle))
+			{
+				textBoxInput.Text = dialog.FileName;
+			}
 		}
 
 		private void buttonOutput_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog folder = new FolderBrowserDialog();
-			folder.Description = "选择输出文件夹目录";
-			folder.RootFolder = Environment.SpecialFolder.MyComputer;
-
-			if (folder.ShowDialog() == DialogResult.OK)
+			FolderSelectDialogSingle.FolderSelectDialogSingle dialog = new FolderSelectDialogSingle.FolderSelectDialogSingle
 			{
-				textBoxOutput.Text = folder.SelectedPath;
+				Title = "选择文件夹"
+			};
+
+			if (dialog.ShowDialog(this.Handle))
+			{
+				textBoxOutput.Text = dialog.FileName;
 			}
 		}
 

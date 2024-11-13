@@ -110,9 +110,12 @@ namespace GMapUtil
                                     {
                                         KmlPlaceMark placeMark = new KmlPlaceMark
                                                                  {
-                                                                     Name = placemark.Name,
-                                                                     StyleUrl = placemark.StyleUrl.ToString()
+                                                                     Name = placemark.Name
                                                                  };
+                                        if (placemark.StyleUrl != null)
+                                        {
+                                            placeMark.StyleUrl = placemark.StyleUrl.ToString();
+										}
                                         if (placemark.Description != null)
                                         {
                                             placeMark.Description = placemark.Description.Text;

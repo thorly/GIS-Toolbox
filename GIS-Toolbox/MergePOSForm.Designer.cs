@@ -89,7 +89,7 @@
 			// 
 			// buttonSetOutput
 			// 
-			this.buttonSetOutput.Location = new System.Drawing.Point(673, 46);
+			this.buttonSetOutput.Location = new System.Drawing.Point(673, 48);
 			this.buttonSetOutput.Name = "buttonSetOutput";
 			this.buttonSetOutput.Size = new System.Drawing.Size(68, 31);
 			this.buttonSetOutput.TabIndex = 1;

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Windows.Forms</RootNamespace>
-    <AssemblyName>GMap.NET.WindowsForms</AssemblyName>
+    <AssemblyName>GMap.NET.WindowsForms</AssemblyName>    
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>

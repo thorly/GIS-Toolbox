@@ -124,7 +124,7 @@
 			this.labelCompanyName.Name = "labelCompanyName";
 			this.labelCompanyName.Size = new System.Drawing.Size(406, 24);
 			this.labelCompanyName.TabIndex = 22;
-			this.labelCompanyName.Text = "公司名称";
+			this.labelCompanyName.Text = "作者";
 			this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxDescription
@@ -160,6 +160,7 @@
 			this.ClientSize = new System.Drawing.Size(652, 392);
 			this.Controls.Add(this.tableLayoutPanel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

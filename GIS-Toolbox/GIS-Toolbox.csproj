@@ -71,6 +71,12 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="CopyProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyProgressForm.Designer.cs">
+      <DependentUpon>CopyProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,12 +95,19 @@
     <Compile Include="ExtractColumnForm.Designer.cs">
       <DependentUpon>ExtractColumnForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FolderSelectDialog.cs" />
-    <Compile Include="ll2kmlForm.cs">
+    <Compile Include="FolderSelectDialog\FolderSelectDialogMulti.cs" />
+    <Compile Include="FolderSelectDialog\FolderSelectDialogSingle.cs" />
+    <Compile Include="ImportKmlProForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ll2kmlForm.Designer.cs">
-      <DependentUpon>ll2kmlForm.cs</DependentUpon>
+    <Compile Include="ImportKmlProForm.Designer.cs">
+      <DependentUpon>ImportKmlProForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LL2kmlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LL2kmlForm.Designer.cs">
+      <DependentUpon>LL2kmlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -115,20 +128,24 @@
     <Compile Include="OrganizeForm.Designer.cs">
       <DependentUpon>OrganizeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="POSForm.cs">
+    <Compile Include="HuacePOSForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="POSForm.Designer.cs">
-      <DependentUpon>POSForm.cs</DependentUpon>
+    <Compile Include="HuacePOSForm.Designer.cs">
+      <DependentUpon>HuacePOSForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TianDiTuCvaProvider.cs" />
-    <Compile Include="TianDiTuCiaProvider.cs" />
-    <Compile Include="TianDiTuImageProvider.cs" />
-    <Compile Include="TianDiTuVectorProvider.cs" />
+    <Compile Include="TianDiTuMap\TianDiTuCvaProvider.cs" />
+    <Compile Include="TianDiTuMap\TianDiTuCiaProvider.cs" />
+    <Compile Include="TianDiTuMap\TianDiTuImageProvider.cs" />
+    <Compile Include="TianDiTuMap\TianDiTuVectorProvider.cs" />
+    <Compile Include="Tools.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyProgressForm.resx">
+      <DependentUpon>CopyProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteFilesForm.resx">
       <DependentUpon>DeleteFilesForm.cs</DependentUpon>
@@ -139,8 +156,11 @@
     <EmbeddedResource Include="ExtractColumnForm.resx">
       <DependentUpon>ExtractColumnForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ll2kmlForm.resx">
-      <DependentUpon>ll2kmlForm.cs</DependentUpon>
+    <EmbeddedResource Include="ImportKmlProForm.resx">
+      <DependentUpon>ImportKmlProForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LL2kmlForm.resx">
+      <DependentUpon>LL2kmlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -151,8 +171,8 @@
     <EmbeddedResource Include="OrganizeForm.resx">
       <DependentUpon>OrganizeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="POSForm.resx">
-      <DependentUpon>POSForm.cs</DependentUpon>
+    <EmbeddedResource Include="HuacePOSForm.resx">
+      <DependentUpon>HuacePOSForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,6 +184,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="HelpDoc\help.docx" />
+    <None Include="HelpDoc\help.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -194,6 +218,10 @@
     <ProjectReference Include="..\GMapMarkerLib\GMapMarkerLib.csproj">
       <Project>{e25d9c8f-534f-4d86-bd45-9469ad9727e0}</Project>
       <Name>GMapMarkerLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMapTools\GMapTools.csproj">
+      <Project>{ed39e8da-a8f3-4906-ba24-90d09d0af7cd}</Project>
+      <Name>GMapTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\GMapUtil\GMapUtil.csproj">
       <Project>{db4076e6-ab5b-48e1-b674-391ccfad9b4f}</Project>

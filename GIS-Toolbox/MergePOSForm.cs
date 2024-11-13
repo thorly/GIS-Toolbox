@@ -25,6 +25,8 @@ namespace GIS_Toolbox
 			OpenFileDialog ofd = new OpenFileDialog();
 			ofd.RestoreDirectory = true;
 			ofd.Multiselect = true;
+			ofd.Filter = "txt (*.txt)|*.txt";
+
 			if (ofd.ShowDialog() == DialogResult.OK)
 			{
 				int length1 = textBoxInputFiles.Lines.Length;
@@ -51,7 +53,7 @@ namespace GIS_Toolbox
 		private void buttonSetOutput_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
-			saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			saveFileDialog.Filter = "txt (*.txt)|*.txt|All files (*.*)|*.*";
 			saveFileDialog.RestoreDirectory = true;
 
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -64,13 +66,13 @@ namespace GIS_Toolbox
 		{
 			if (textBoxInputFiles.Lines.Length == 0)
 			{
-				MessageBox.Show("请添加需要合并的POS文件", "警告");
+				MessageBox.Show("请添加需要合并的POS文件", "提示");
 				return;
 			}
 
 			if (textBoxOutputFile.Text == "")
 			{
-				MessageBox.Show("请设置合并后的POS文件路径", "警告");
+				MessageBox.Show("请设置合并后的POS文件路径", "提示");
 			}
 
 			List<string> posFiles = textBoxInputFiles.Lines.ToList();

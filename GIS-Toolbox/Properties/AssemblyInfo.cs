@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("GIS-Toolbox")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("GIS工具箱，提供一些常用的小工具。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("JXEPDI")]
+[assembly: AssemblyCompany("LEI YUAN")]
 [assembly: AssemblyProduct("GIS-Toolbox")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]

@@ -9,57 +9,85 @@ using System.Windows.Forms;
 using MetadataExtractor;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using DotSpatial.Projections;
 using System.Drawing.Drawing2D;
 using GMapUtil;
 using GMapCommonType;
-using GMapMarkerLib;
+using System.Linq;
+using GMapTools;
+using GMapDrawTools;
+using System.ComponentModel;
 
 
 namespace GIS_Toolbox
 {
 	public partial class MainForm : Form
 	{
-		// polygons overlay
-		private GMapOverlay polygonsOverlay = new GMapOverlay("polygonsOverlay");
-		// POS markers overlay
-		private GMapOverlay posMarkers = new GMapOverlay("posMarkers");
-
+		private GMapMarker currentMarker;
 		public MainForm()
 		{
 			InitializeComponent();
 			InitMap();
+
+			//添加treeView根节点
+			TreeNode rootNode = new TreeNode("图层管理")
+			{
+				Tag = "图层管理",//树节点数据
+				Text = "图层管理"//节点标签显示内容
+			};
+
+			this.treeView.Nodes.Add(rootNode);
+
+			//treeView设置
+			this.treeView.CheckBoxes = true;
+			this.treeView.Nodes[0].Checked = true;
+
+			//treeView checkbox
+			this.treeView.AfterCheck += TreeView_AfterCheck;
+			this.treeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
+
+			//backgroundworker设置
+			this.backgroundWorker.WorkerReportsProgress = true;
+			this.backgroundWorker.WorkerSupportsCancellation = true;
+
+			this.backgroundWorker.DoWork += BackgroundWorker_DoWork;
+			this.backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+			this.backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
 		}
 
 		private void InitMap()
 		{
 			//不显示中心十字丝
-			gMapControl.ShowCenter = false;
+			this.gMapControl.ShowCenter = false;
 			//鼠标左键拖拽地图
-			gMapControl.DragButton = MouseButtons.Left;
+			this.gMapControl.DragButton = MouseButtons.Left;
 			//设置图源
-			gMapControl.MapProvider = TianDiTuImageProvider.Instance;
+			//gMapControl.MapProvider = TianDiTuImageProvider.Instance;
+			this.gMapControl.MapProvider = GMapProviders.BingHybridMap;
 
 			//设置工作模式
 			GMaps.Instance.Mode = AccessMode.ServerAndCache;
 			//设置地图中心
-			gMapControl.Position = new PointLatLng(28.6985, 115.9705);
+			this.gMapControl.Position = new PointLatLng(28.6989, 115.9710);
 
 			//最大、最小显示级别
-			gMapControl.MinZoom = 1;
-			gMapControl.MaxZoom = 30;
+			this.gMapControl.MinZoom = 1;
+			this.gMapControl.MaxZoom = 30;
 			//当前显示级别
-			gMapControl.Zoom = 8;
-
-			//添加到gmapcontrol
-			gMapControl.Overlays.Add(polygonsOverlay);
-			gMapControl.Overlays.Add(posMarkers);
+			this.gMapControl.Zoom = 10;
 
 			//marker点击事件
-			gMapControl.OnMarkerClick += new MarkerClick(GMapControl_OnMarkerClick);
+			this.gMapControl.OnMarkerClick += new MarkerClick(GMapControl_OnMarkerClick);
 
 			//polygon双击事件
-			gMapControl.OnPolygonDoubleClick += new PolygonDoubleClick(GMapControl_OnPolygonDoubleClick);
+			this.gMapControl.OnPolygonDoubleClick += new PolygonDoubleClick(GMapControl_OnPolygonDoubleClick);
+
+			//测距
+			drawDistance = new DrawDistance(this.gMapControl);
+			drawDistance.DrawComplete += new EventHandler<DrawDistanceEventArgs>(drawDistance_DrawComplete);
+
+			//绘图
+			draw = new Draw(this.gMapControl);
+			draw.DrawComplete += new EventHandler<DrawEventArgs>(draw_DrawComplete);
 		}
 
 		private void GMapControl_OnPolygonDoubleClick(GMapPolygon item, MouseEventArgs e)
@@ -67,107 +95,90 @@ namespace GIS_Toolbox
 			//TODO
 		}
 
-		private void GMapControl_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+		/// <summary>
+		/// treeView节点双击事件
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <exception cref="NotImplementedException"></exception>
+		private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			//DisplayForm displayForm = new DisplayForm(item.ToolTipText);
-			//displayForm.Show(this);
+			string name = e.Node.Name;
 
-			if (File.Exists(item.ToolTipText))
+			List<GMapOverlay> mapOverlays = this.gMapControl.Overlays.ToList();
+
+			foreach (GMapOverlay overlay in mapOverlays)
 			{
-				//调用系统默认图片浏览器查看图片
-				//建立新的系统进程
-				System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
-				//设置图片路径
-				process.StartInfo.FileName = item.ToolTipText;
-				//设置进程运行参数，这里以最大化窗口方法显示图片 
-				process.StartInfo.Arguments = "rundl132.exe C://WINDOWS//system32//shimgvw.dll,ImageView_Fullscreen";
-				//此项为是否使用Shell执行程序，因系统默认为true，此项也可不设，但若设置必须为true    
-				process.StartInfo.UseShellExecute = true;
+				if (overlay.Id == name)
+				{
+					if (overlay.Markers.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterMarkers(name);
+					}
+					if (overlay.Routes.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoutes(name);
+					}
+					if (overlay.Polygons.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoute(overlay.Polygons[0]);
+					}
 
-				//此处可以更改进程所打开窗体的显示样式，可以不设
-				process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-				process.Start();
-				process.Close();
+					this.gMapControl.Refresh();
+				}
 			}
-			else
-			{
-				return;
-			}
-			
-		}
-
-		private static double[] ConvertCGCS2000ToWGS84(double x, double y, int centerLng)
-		{
-			// 定义CGCS2000投影
-			ProjectionInfo cgcs2000 = new ProjectionInfo();
-			switch (centerLng)
-			{
-				case 111:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM111E;
-					break;
-				case 114:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM114E;
-					break;
-				case 117:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM117E;
-					break;
-				case 120:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM120E;
-					break;
-			}
-				
-			// 定义WGS84地理坐标系
-			ProjectionInfo wgs84 = KnownCoordinateSystems.Geographic.World.WGS1984;
-
-			// 输入的CGCS2000坐标
-			double[] xy = new double[] { x, y };
-			double[] z = new double[] { 0 };
-
-			// 执行坐标转换
-			Reproject.ReprojectPoints(xy, z, cgcs2000, wgs84, 0, 1);
-
-			// 返回转换后的经纬度
-			return new double[] { xy[1], xy[0] }; // 纬度在前，经度在后
 		}
 
 		/// <summary>
-		/// 度分秒转十进制度
+		/// marker单击事件
 		/// </summary>
-		/// <param name="value">度分秒</param>
-		/// <returns>十进制度</returns>
-		public static double ConvertDMSToDecimalDegree(string value)
+		/// <param name="item"></param>
+		/// <param name="e"></param>
+		private void GMapControl_OnMarkerClick(GMapMarker item, MouseEventArgs e)
 		{
-			string valueNoSpace = value.Replace(" ", "").Replace('″', '"').Replace("′", "'");
-
-			double decimalDegree = 0.0;
-			// 度
-			int d = valueNoSpace.IndexOf('°');
-			if (d < 0)
+			if (e.Button == MouseButtons.Left)
 			{
-				return decimalDegree;
-			}
-			string degree = valueNoSpace.Substring(0, d);
-			decimalDegree += Convert.ToDouble(degree);
+				//检查图片是否存在，存在则显示
+				if (File.Exists(item.ToolTipText))
+				{
+					//DisplayForm displayForm = new DisplayForm(item.ToolTipText);
+					//displayForm.Show(this);
 
-			// 分
-			int m = valueNoSpace.IndexOf("'");
-			if (m < 0)
-			{
-				return decimalDegree;
-			}
-			string minute = valueNoSpace.Substring(d + 1, m - d - 1);
-			decimalDegree += ((Convert.ToDouble(minute)) / 60);
+					//调用系统默认图片浏览器查看图片
+					//建立新的系统进程
+					System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
+					//设置图片路径
+					process.StartInfo.FileName = item.ToolTipText;
+					//设置进程运行参数，这里以最大化窗口方法显示图片 
+					process.StartInfo.Arguments = "rundl132.exe C://WINDOWS//system32//shimgvw.dll,ImageView_Fullscreen";
+					//此项为是否使用Shell执行程序，因系统默认为true，此项也可不设，但若设置必须为true    
+					process.StartInfo.UseShellExecute = true;
 
-			// 秒
-			int s = valueNoSpace.IndexOf('"');
-			if (s < 0)
-			{
-				return decimalDegree;
-			}
-			string second = valueNoSpace.Substring(m + 1, s - m - 1);
-			decimalDegree += (Convert.ToDouble(second) / 3600);
+					//此处可以更改进程所打开窗体的显示样式，可以不设
+					process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+					process.Start();
+					process.Close();
+				}
+				else
+				{
+					//删除测距marker
+					if (item is DrawDeleteMarker)
+					{
+						currentMarker = item as DrawDeleteMarker;
 
-			return decimalDegree;
+						GMapOverlay overlay = currentMarker.Overlay;
+						if (overlay.Markers.Contains(currentMarker))
+						{
+							overlay.Markers.Remove(currentMarker);
+						}
+
+						if (this.gMapControl.Overlays.Contains(overlay))
+						{
+							this.gMapControl.Overlays.Remove(overlay);
+						}
+					}
+				}
+			}
 		}
 
 		private void 整理Lidar数据ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,135 +187,156 @@ namespace GIS_Toolbox
 			organizeForm.ShowDialog(this);
 		}
 
-		private void DrawPlaceMark(KmlPlaceMark placeMark, bool centerToMark = true,
-			bool showToolTip = true, GMarkerGoogleType markerType = GMarkerGoogleType.blue_pushpin, bool isTempMark = false)
+		#region 导入kml
+		private void DrawPlaceMark(GMapOverlay kmlOverlay, List<KmlPlaceMark> placeMarks, bool showToolTip, GMarkerGoogleType markerType, Color lineColor)
 		{
-			if (((placeMark != null) && (placeMark.Geometry != null)) && (placeMark.Geometry.Points.Count != 0))
+			foreach (KmlPlaceMark placeMark in placeMarks)
 			{
-				switch (placeMark.Geometry.GeoType)
+				if (((placeMark != null) && (placeMark.Geometry != null)) && (placeMark.Geometry.Points.Count != 0))
 				{
-					case GeometryType.Point:
-						{
-							GMarkerGoogle item = new GMarkerGoogle(placeMark.Geometry.ToPointLatLngs()[0], markerType);
-							this.polygonsOverlay.Markers.Add(item);
-							if (showToolTip)
+					switch (placeMark.Geometry.GeoType)
+					{
+						case GeometryType.Point:
 							{
-								if (!isTempMark)
+								GMarkerGoogle item = new GMarkerGoogle(placeMark.Geometry.ToPointLatLngs()[0], markerType);
+								item.ToolTipText = placeMark.Name;
+
+								if (showToolTip)
 								{
-									item.ToolTipText = placeMark.Name;
-									//item.ToolTipMode = MarkerTooltipMode.OnMouseOver;
 									item.ToolTipMode = MarkerTooltipMode.Always;
 								}
 								else
 								{
-									item.ToolTipText = placeMark.Description;
+									item.ToolTipMode = MarkerTooltipMode.OnMouseOver;
 								}
-							}
-							if (centerToMark)
-							{
-								gMapControl.ZoomAndCenterMarkers(this.polygonsOverlay.Id);
-							}
-							return;
-						}
-					case GeometryType.Polyline:
-						{
-							GMapRoute route = new GMapRoute(placeMark.Geometry.ToPointLatLngs(), "_kmlPolyline")
-							{
-								IsHitTestVisible = true
-							};
-							if (showToolTip)
-							{
-								int num2 = placeMark.Geometry.Points.Count / 2;
-								Point2D pointd2 = placeMark.Geometry.Points[num2];
-								GMapMarkerEllipse ellipse2 = new GMapMarkerEllipse(pointd2.ToPointLatLngs()[0])
-								{
-									ToolTipText = string.Format("名称:{0}\r\n类型:{1}\r\n描述:{2}", placeMark.Name, "多边形", placeMark.Description),
-									ToolTipMode = MarkerTooltipMode.OnMouseOver
-								};
-								//route.ToolTipMarker = ellipse2;
-								//route.ToolTipPosition = MapRouteToolTipPosition.Custom;
-							}
-							this.polygonsOverlay.Routes.Add(route);
-							if (centerToMark)
-							{
-								gMapControl.ZoomAndCenterRoute(route);
-							}
-							return;
-						}
-					case GeometryType.Polygon:
-						{
-							GMapPolygon polygon = new GMapPolygon(placeMark.Geometry.ToPointLatLngs(), "_kmlPolygon")
-							{
-								Stroke = new Pen(Color.FromArgb(0xff, Color.Blue))
-							};
-							polygon.Stroke.Width = 2f;
-							polygon.Stroke.DashStyle = DashStyle.Dash;
-							polygon.Fill = new SolidBrush(Color.FromArgb(20, Color.Blue));
-							polygon.IsHitTestVisible = true;
-							//polygon.EnableRightClick = true;
-							if (showToolTip)
-							{
-								GMapMarkerEllipse ellipse = new GMapMarkerEllipse(placeMark.Geometry.Center.ToPointLatLngs()[0])
-								{
-									ToolTipText = string.Format("名称:{0}\r\n类型:{1}\r\n描述:{2}", placeMark.Name, "多边形", placeMark.Description),
-									ToolTipMode = MarkerTooltipMode.OnMouseOver
-								};
-								//polygon.ToolTipMarker = ellipse;
-								//polygon.ToolTipPosition = MapRouteToolTipPosition.Custom;
-							}
-							this.polygonsOverlay.Polygons.Add(polygon);
-							if (centerToMark)
-							{
-								gMapControl.ZoomAndCenterRoute(polygon);
-								return;
-							}
-							return;
-						}
-				}
-			}
-		}
 
-		private void InitKMLPlaceMarks(List<KmlPlaceMark> placeMarks)
-		{
-			Polygon polygon = new Polygon();
-			
-			foreach (KmlPlaceMark mark in placeMarks)
-			{
-				DrawPlaceMark(mark, false, true, GMarkerGoogleType.blue_pushpin, false);
-				polygon.Points.AddRange(mark.Geometry.Points);
-			}
-			BoundingBox envelope = polygon.Envelope;
-			this.gMapControl.SetZoomToFitRect(RectLatLng.FromLTRB(envelope.Left, envelope.Top, envelope.Right, envelope.Bottom));
-			this.gMapControl.Position = new PointLatLng(envelope.Center.Y, envelope.Center.X);
-		}
+								kmlOverlay.Markers.Add(item);
+								break;
+							}
+						case GeometryType.Polyline:
+							{
+								GMapRoute route = new GMapRoute(placeMark.Geometry.ToPointLatLngs(), placeMark.Name)
+								{
+									IsHitTestVisible = true,
+									Stroke = new Pen(lineColor, 2)
+								};
 
-		private void ImportKmlToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				using (FileDialog dialog = new OpenFileDialog())
-				{
-					dialog.CheckPathExists = true;
-					dialog.CheckFileExists = false;
-					dialog.AddExtension = true;
-					dialog.ValidateNames = true;
-					dialog.Title = "选择KML文件";
-					dialog.FilterIndex = 1;
-					dialog.RestoreDirectory = true;
-					dialog.Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*";
-					if (dialog.ShowDialog() == DialogResult.OK)
-					{
-						//this.polygonsOverlay.Clear();
-						InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(dialog.FileName));
+								kmlOverlay.Routes.Add(route);
+								break;
+							}
+						case GeometryType.Polygon:
+							{
+								GMapPolygon polygon = new GMapPolygon(placeMark.Geometry.ToPointLatLngs(), placeMark.Name)
+								{
+									Stroke = new Pen(Color.FromArgb(0xff, lineColor))
+								};
+								polygon.Stroke.Width = 2f;
+								polygon.Stroke.DashStyle = DashStyle.Dash;
+								polygon.Fill = new SolidBrush(Color.FromArgb(20, lineColor));
+								polygon.IsHitTestVisible = true;
+
+								kmlOverlay.Polygons.Add(polygon);
+								break;
+							}
 					}
 				}
 			}
-			catch (Exception exception)
+		}
+
+
+		private void ImportKmlToolStripMenuItem_Click_1(object sender, EventArgs e)
+		{
+			OpenFileDialog dialog = new OpenFileDialog
 			{
-				MessageBox.Show("读取KML文件时出现异常");
-                Console.WriteLine(exception);
+				CheckPathExists = true,
+				CheckFileExists = false,
+				AddExtension = true,
+				ValidateNames = true,
+				Title = "选择KML文件",
+				FilterIndex = 1,
+				RestoreDirectory = true,
+				Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*",
+				Multiselect = true
+			};
+
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				foreach (string fileName in dialog.FileNames)
+				{
+					string overlayId = fileName + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+					GMapOverlay kmlOverlay = new GMapOverlay(overlayId);
+					this.gMapControl.Overlays.Add(kmlOverlay);
+
+					List<KmlPlaceMark> placeMarks = KmlUtil.GetPlaceMarksFromKmlFile(fileName);
+					DrawPlaceMark(kmlOverlay, placeMarks, false, GMarkerGoogleType.blue_small, Color.Blue);
+
+					//添加node节点
+					Tools.addChildNode(this.treeView.Nodes[0], overlayId, fileName);
+
+					//缩放显示
+					if (kmlOverlay.Markers.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterMarkers(kmlOverlay.Id);
+					}
+					if (kmlOverlay.Routes.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoutes(kmlOverlay.Id);
+					}
+					if (kmlOverlay.Polygons.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoute(kmlOverlay.Polygons[0]);
+					}
+				}
+
 			}
 		}
+
+		private void ImportKmlProToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ImportKmlProForm form = new ImportKmlProForm();
+			DialogResult dialogResult = form.ShowDialog(this);
+
+			if (dialogResult == DialogResult.OK)
+			{
+				string[] kmlFiles = form.GetKmlFiles();
+				GMarkerGoogleType markerType = form.GetMarkerType();
+				Color lineColor = form.GetLineColor();
+				bool showToolTip = form.GetShowToolTip();
+
+
+				foreach (string fileName in kmlFiles)
+				{
+					string overlayId = fileName + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+					GMapOverlay kmlOverlay = new GMapOverlay(overlayId);
+
+					List<KmlPlaceMark> placeMarks = KmlUtil.GetPlaceMarksFromKmlFile(fileName);
+					DrawPlaceMark(kmlOverlay, placeMarks, showToolTip, markerType, lineColor);
+
+					//添加node节点
+					Tools.addChildNode(this.treeView.Nodes[0], overlayId, fileName);
+
+					this.gMapControl.Overlays.Add(kmlOverlay);
+
+					//缩放显示
+					if (kmlOverlay.Markers.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterMarkers(kmlOverlay.Id);
+					}
+					if (kmlOverlay.Routes.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoutes(kmlOverlay.Id);
+					}
+					if (kmlOverlay.Polygons.Count > 0)
+					{
+						this.gMapControl.ZoomAndCenterRoute(kmlOverlay.Polygons[0]);
+					}
+				}
+			}
+		}
+
+		#endregion
 
 		private void MergePOSToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -318,9 +350,9 @@ namespace GIS_Toolbox
 			deleteFilesForm.ShowDialog(this);
 		}
 
-		private void Ll2kmlToolStripMenuItem_Click(object sender, EventArgs e)
+		private void LL2KmlToolStripMenuItem_Click_1(object sender, EventArgs e)
 		{
-			ll2kmlForm ll2KmlForm = new ll2kmlForm();
+			LL2kmlForm ll2KmlForm = new LL2kmlForm();
 			ll2KmlForm.ShowDialog(this);
 		}
 
@@ -332,20 +364,34 @@ namespace GIS_Toolbox
 
 		private void ClearPOSToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			posMarkers.Clear();
+			List<GMapOverlay> mapOverlays = this.gMapControl.Overlays.ToList();
+
+			foreach (GMapOverlay mapOverlay in mapOverlays)
+			{
+				if (!mapOverlay.Id.EndsWith(".kml"))
+				{
+					this.gMapControl.Overlays.Remove(mapOverlay);
+					this.treeView.Nodes[0].Nodes.RemoveByKey(mapOverlay.Id);
+				}
+			}
+			this.gMapControl.Refresh();
+
 			MessageBox.Show("清除成功", "提示");
 		}
 
 		private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			posMarkers.Clear();
-			polygonsOverlay.Clear();
+			this.gMapControl.Overlays.Clear();
+			this.treeView.Nodes[0].Nodes.Clear();
+
+			this.gMapControl.Refresh();
+
 			MessageBox.Show("清除成功", "提示");
 		}
 
 		private void HuaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			POSForm posForm = new POSForm();
+			HuacePOSForm posForm = new HuacePOSForm();
 			posForm.StartPosition = FormStartPosition.CenterParent;
 
 			DialogResult dialogResult = posForm.ShowDialog(this);
@@ -364,8 +410,9 @@ namespace GIS_Toolbox
 
 					if (File.Exists(posFile))
 					{
+						string overlayId = imageDir + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-						GMapOverlay pointMarkers = new GMapOverlay(imageDir);
+						GMapOverlay pointMarkers = new GMapOverlay(overlayId);
 
 						string[] lines = File.ReadAllLines(posFile, Encoding.ASCII);
 						foreach (string line in lines)
@@ -383,26 +430,35 @@ namespace GIS_Toolbox
 								// 检测图片是否存在，不存在则不添加marker
 								if (File.Exists(imageFile))
 								{
-									double[] latlon = ConvertCGCS2000ToWGS84(x, y, centerLng);
+									double[] latlon = Tools.ConvertCGCS2000ToWGS84(x, y, centerLng);
 
 									PointLatLng point = new PointLatLng(latlon[0], latlon[1]);
 
 									GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_small);
 									marker.ToolTipText = imageFile;
 
-									posMarkers.Markers.Add(marker);
+									pointMarkers.Markers.Add(marker);
 								}
 							}
 						}
 
-						gMapControl.Overlays.Add(pointMarkers);
+						//添加node节点
+						Tools.addChildNode(this.treeView.Nodes[0], overlayId, imageDir);
+
+						//添加图层
+						this.gMapControl.Overlays.Add(pointMarkers);
+
+						//只缩放显示最后一次加载的图层
+						if (Array.IndexOf(imageDirs, imageDir) == imageDirs.Length - 1)
+						{
+							this.gMapControl.ZoomAndCenterMarkers(pointMarkers.Id);
+						}
 					}
 					else
 					{
 						MessageBox.Show("POS文件不存在", "错误");
 					}
 				}
-				gMapControl.ZoomAndCenterMarkers(null);
 			}
 		}
 
@@ -416,6 +472,18 @@ namespace GIS_Toolbox
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				string[] fileNames = openFileDialog.FileNames;
+
+				string imageDir = Path.GetDirectoryName(fileNames[0]);
+
+				string overlayId = imageDir + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+				//添加node节点
+				Tools.addChildNode(this.treeView.Nodes[0], overlayId, imageDir);
+
+				GMapOverlay pointMarkers = new GMapOverlay(overlayId);
+
+				this.gMapControl.Overlays.Add(pointMarkers);
+
 				foreach (string fileName in fileNames)
 				{
 					if (File.Exists(fileName))
@@ -431,11 +499,11 @@ namespace GIS_Toolbox
 								{
 									if (tag.Name == "GPS Latitude")
 									{
-										latitude = ConvertDMSToDecimalDegree(tag.Description);
+										latitude = Tools.ConvertDMSToDecimalDegree(tag.Description);
 									}
 									if (tag.Name == "GPS Longitude")
 									{
-										longitude = ConvertDMSToDecimalDegree(tag.Description);
+										longitude = Tools.ConvertDMSToDecimalDegree(tag.Description);
 									}
 								}
 							}
@@ -446,11 +514,359 @@ namespace GIS_Toolbox
 						GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_small);
 						marker.ToolTipText = fileName;
 
-						posMarkers.Markers.Add(marker);
+						pointMarkers.Markers.Add(marker);
 					}
 				}
-				gMapControl.ZoomAndCenterMarkers(null);
+
+				this.gMapControl.ZoomAndCenterMarkers(pointMarkers.Id);
 			}
+		}
+
+		#region treeView
+		private void TreeView_AfterCheck(object sender, TreeViewEventArgs e)
+		{
+			if (e.Action == TreeViewAction.ByMouse)
+			{
+				if (e.Node.Checked)
+				{
+					setParentNodeChecked(e.Node);
+					setChildNodeChecked(e.Node);
+				}
+				else
+				{
+					setChildNodeCancel(e.Node);
+					setParentNodeCancel(e.Node);
+				}
+			}
+		}
+
+		private void setChildNodeCancel(TreeNode node)//取消所有子节点的选择
+		{
+			foreach (TreeNode a in node.Nodes)
+			{
+				if (a != null)
+				{
+					a.Checked = false;
+					setChildNodeCancel(a);
+				}
+			}
+		}
+
+		private void setParentNodeCancel(TreeNode node)//取消祖先结点选择
+		{
+			if (node.Parent != null && judegChildChecked(node.Parent))
+			{
+				TreeNode parent;
+				node.Parent.Checked = false;
+				parent = node.Parent;
+				setParentNodeCancel(parent);
+			}
+		}
+
+		private void setParentNodeChecked(TreeNode t)//选择所有祖先结点
+		{
+			TreeNode parent = t.Parent;
+			while (parent != null && parent.Checked == false)
+			{
+				parent.Checked = true;
+				parent = parent.Parent;
+			}
+		}
+		private void setChildNodeChecked(TreeNode t)//勾选所有子节点
+		{
+
+			foreach (TreeNode a in t.Nodes)
+			{
+				if (a != null)
+				{
+					a.Checked = true;
+					setChildNodeChecked(a);
+				}
+			}
+
+		}
+		private bool judegChildChecked(TreeNode t)//判断其子节点是否有勾选状态
+		{
+			foreach (TreeNode a in t.Nodes)
+			{
+				if (a != null && a.Checked == true)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		#endregion
+
+		private void TianDiTuToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.gMapControl.MapProvider = TianDiTuVectorProvider.Instance;
+		}
+
+		private void TianDiTuImageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.gMapControl.MapProvider = TianDiTuImageProvider.Instance;
+		}
+
+		private void BingImageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//this.gMapControl.MapProvider = GMapProviders.BingSatelliteMap;
+			this.gMapControl.MapProvider = GMapProviders.BingHybridMap;
+		}
+
+		#region 另存为kml
+
+		private void SaveKmlToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				Filter = "kml文件 (*.kml)|*.kml",
+				RestoreDirectory = true
+			};
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				//被选中的节点
+				TreeNode selectedNode = this.treeView.SelectedNode;
+
+				foreach (GMapOverlay overlay in this.gMapControl.Overlays)
+				{
+					if (overlay.Id == selectedNode.Name)
+					{
+						string filename = saveFileDialog.FileName;
+						Tools.SaveKmlFile(overlay, filename);
+					}
+				}
+
+				MessageBox.Show("保存成功", "提示");
+			}
+		}
+
+		private void SaveKmlCheckedToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				Filter = "kml文件 (*.kml)|*.kml",
+				RestoreDirectory = true
+			};
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				GMapOverlay outOverlay = new GMapOverlay();
+				string filename = saveFileDialog.FileName;
+
+				foreach (TreeNode node in this.treeView.Nodes[0].Nodes)
+				{
+					if (node.Checked)
+					{
+						foreach (GMapOverlay overlay in this.gMapControl.Overlays)
+						{
+							if (overlay.Id == node.Name)
+							{
+								if (overlay.Markers.Count > 0)
+								{
+									foreach (GMapMarker marker in overlay.Markers)
+									{
+										outOverlay.Markers.Add(marker);
+									}
+
+								}
+								if (overlay.Routes.Count > 0)
+								{
+									foreach (GMapRoute route in overlay.Routes)
+									{
+										outOverlay.Routes.Add(route);
+									}
+								}
+								if (overlay.Polygons.Count > 0)
+								{
+									foreach (GMapPolygon polygon in overlay.Polygons)
+									{
+										outOverlay.Polygons.Add(polygon);
+									}
+								}
+							}
+						}
+					}
+				}
+
+				Tools.SaveKmlFile(outOverlay, filename);
+				MessageBox.Show("保存成功", "提示");
+			}
+		}
+
+		#endregion
+
+		#region 导出范围内图片
+
+		CopyProgressForm copyProgressForm = new CopyProgressForm();
+
+		private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			int pictureCount = (int)e.UserState;
+
+			copyProgressForm.SetProgressBarMax(pictureCount);
+			copyProgressForm.SetProgressBarValue(e.ProgressPercentage);
+
+			double percentage = Math.Round((double)e.ProgressPercentage / pictureCount * 100, 1);
+
+			copyProgressForm.SetPercentage(percentage);
+		}
+
+		private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			copyProgressForm.Close();
+			MessageBox.Show("完成", "提示");
+		}
+
+		private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			BackgroundWorker backgroundWorker = sender as BackgroundWorker;
+
+			var pictureDict = (Dictionary<string, List<string>>)e.Argument;
+
+			//获取图片数量
+			int pictureCount = 0;
+			foreach (List<string> pictures in pictureDict.Values)
+			{
+				pictureCount = pictureCount + pictures.Count;
+			}
+
+			int i = 0;
+			//复制图片和POS
+			foreach (string folder in pictureDict.Keys)
+			{
+				//新建POS文件
+				FileInfo outputPos = new FileInfo(folder + "/Metashape.txt");
+				StreamWriter sw = outputPos.CreateText();
+
+				foreach (string picture in pictureDict[folder])
+				{
+					//复制图片
+					string picName = Path.GetFileName(picture);
+					File.Copy(picture, Path.Combine(folder, picName));
+
+					//复制POS
+					string inputPos = Path.Combine(Path.GetDirectoryName(picture), "Metashape.txt");
+					if (File.Exists(inputPos))
+					{
+						string pos = Tools.GetPosUsingName(inputPos, picName);
+						if (pos != null)
+						{
+							sw.WriteLine(pos);
+						}
+					}
+
+					//使用backgroundWorker传输进度
+					backgroundWorker.ReportProgress(++i, pictureCount);
+				}
+
+				sw.Close();
+			}
+		}
+
+
+		private void ExportImageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FolderSelectDialogMulti.FolderSelectDialogMulti dialog = new FolderSelectDialogMulti.FolderSelectDialogMulti
+			{
+				Title = "选择文件夹（支持多选）"
+			};
+
+			if (dialog.ShowDialog(this.Handle))
+			{
+				string rootFolder = dialog.FileName;
+
+				//被选中节点
+				TreeNode selectedNode = this.treeView.SelectedNode;
+
+				//新建一个字典，存放查找出来的图片路径和被存放路径
+				Dictionary<string, List<string>> pictureDict = new Dictionary<string, List<string>>();
+
+				//遍历查找
+				int i = 0;
+				int pictureCount = 0;  //图片数量
+
+				foreach (GMapOverlay overlay in this.gMapControl.Overlays)
+				{
+					if (overlay.Id == selectedNode.Name)
+					{
+						if (overlay.Polygons.Count > 0)
+						{
+							List<string> images = new List<string>();
+
+							foreach (GMapPolygon polygon in overlay.Polygons)
+							{
+								i++;
+								List<string> picture = new List<string>();
+
+								//新建文件夹
+								string folder = rootFolder + "/" + polygon.Name + i.ToString();
+
+								if (!System.IO.Directory.Exists(folder))
+								{
+									System.IO.Directory.CreateDirectory(folder);
+								}
+
+								//查找图片
+								foreach (GMapOverlay overlay2 in this.gMapControl.Overlays)
+								{
+									if (overlay2 != overlay && overlay2.Markers.Count > 0)
+									{
+										foreach (GMapMarker marker in overlay2.Markers)
+										{
+											if (polygon.IsInside(marker.Position))
+											{
+												//图片路径
+												string picPath = marker.ToolTipText;
+												//图片存在则添加
+												if (File.Exists(picPath))
+												{
+													picture.Add(picPath);
+													pictureCount++;
+												}
+											}
+										}
+									}
+								}
+
+								pictureDict.Add(folder, picture);
+							}
+
+							//开始执行后台操作，并传递参数
+							this.backgroundWorker.RunWorkerAsync(pictureDict);
+
+							//显示进度条
+							copyProgressForm.ShowDialog(this);
+						}
+						else
+						{
+							MessageBox.Show("不包含闭合多段线，请重新选择!", "提示");
+						}
+					}
+				}
+			}
+		}
+
+		#endregion
+
+		private void DeleteLayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			List<GMapOverlay> mapOverlays = this.gMapControl.Overlays.ToList();
+
+			TreeNode selectedNode = this.treeView.SelectedNode;
+
+			foreach (GMapOverlay overlay in mapOverlays)
+			{
+				if (overlay.Id == selectedNode.Name)
+				{
+					this.gMapControl.Overlays.Remove(overlay);
+					this.treeView.Nodes[0].Nodes.RemoveByKey(overlay.Id);
+				}
+			}
+
+			this.gMapControl.Refresh();
 		}
 
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -459,20 +875,90 @@ namespace GIS_Toolbox
 			aboutBox.ShowDialog(this);
 		}
 
-		private void TianDiTuToolStripMenuItem_Click(object sender, EventArgs e)
+		private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			gMapControl.MapProvider = TianDiTuVectorProvider.Instance;
+			System.Diagnostics.Process.Start(Application.StartupPath.ToString() + "\\HelpDoc\\help.pdf");
 		}
 
-		private void TianDiTuImageToolStripMenuItem_Click(object sender, EventArgs e)
+
+		//测距
+		private DrawDistance drawDistance;
+		private void MeasureDistanceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			gMapControl.MapProvider = TianDiTuImageProvider.Instance;
+			drawDistance.IsEnable = true;
 		}
 
-		private void BingImageToolStripMenuItem_Click(object sender, EventArgs e)
+		private void drawDistance_DrawComplete(object sender, DrawDistanceEventArgs e)
 		{
-			//this.gMapControl.MapProvider = GMapProviders.BingSatelliteMap;
-			this.gMapControl.MapProvider = GMapProviders.BingHybridMap;
+			if (e != null)
+			{
+				GMapOverlay distanceOverlay = new GMapOverlay();
+				this.gMapControl.Overlays.Add(distanceOverlay);
+				foreach (LineMarker line in e.LineMarkers)
+				{
+					distanceOverlay.Markers.Add(line);
+				}
+				foreach (DrawDistanceMarker marker in e.DistanceMarkers)
+				{
+					distanceOverlay.Markers.Add(marker);
+				}
+				distanceOverlay.Markers.Add(e.DistanceDeleteMarker);
+			}
+			drawDistance.IsEnable = false;
+		}
+
+		//绘图
+		private Draw draw;
+
+		private void DrawPolylineToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			draw.DrawingMode = DrawingMode.Route;
+			draw.IsEnable = true;
+		}
+
+		private void DrawPolygonToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			draw.DrawingMode = DrawingMode.Polygon;
+			draw.IsEnable = true;
+		}
+
+		private void draw_DrawComplete(object sender, DrawEventArgs e)
+		{
+			if (e != null && (e.Polygon != null || e.Route != null))
+			{
+				switch (e.DrawingMode)
+				{
+					case DrawingMode.Polygon:
+						//添加node节点
+						string polygonName = "polygon_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+						Tools.addChildNode(this.treeView.Nodes[0], polygonName, polygonName);
+
+						GMapOverlay polygonOverlay = new GMapOverlay(polygonName);
+						//要先添加到图层，然后再添加多段线
+						this.gMapControl.Overlays.Add(polygonOverlay);
+						polygonOverlay.Polygons.Add(e.Polygon);
+
+						break;
+
+					case DrawingMode.Route:
+						//添加node节点
+						string routeName = "polyline_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+						Tools.addChildNode(this.treeView.Nodes[0], routeName, routeName);
+
+						GMapOverlay routeOverlay = new GMapOverlay(routeName);
+						this.gMapControl.Overlays.Add(routeOverlay);
+						routeOverlay.Routes.Add(e.Route);
+
+						break;
+
+					default:
+						draw.IsEnable = false;
+						break;
+				}
+			}
+			draw.IsEnable = false;
 		}
 	}
 }
