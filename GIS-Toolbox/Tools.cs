@@ -16,6 +16,34 @@ namespace GIS_Toolbox
 	public class Tools
 	{
 		/// <summary>
+		/// 3°带中央子午线对应的投影
+		/// </summary>
+		private readonly static Dictionary<int, ProjectionInfo> projectionInfoDict = new Dictionary<int, ProjectionInfo>()
+		{
+			{ 75, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM75E },
+			{ 78, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM78E },
+			{ 81, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM81E },
+			{ 84, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM84E },
+			{ 87, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM87E },
+			{ 90, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM90E },
+			{ 93, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM93E },
+			{ 96, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM96E },
+			{ 99, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM99E },
+			{ 102, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM102E },
+			{ 105, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM105E },
+			{ 108, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM108E },
+			{ 111, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM111E },
+			{ 114, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM114E },
+			{ 117, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM117E },
+			{ 120, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM120E },
+			{ 123, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM123E },
+			{ 126, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM126E },
+			{ 129, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM129E },
+			{ 132, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM132E },
+			{ 135, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM135E }
+		};
+
+		/// <summary>
 		/// CGCS2000平面坐标转经纬度坐标（3°带）
 		/// </summary>
 		/// <param name="x">北坐标</param>
@@ -24,36 +52,54 @@ namespace GIS_Toolbox
 		/// <returns>纬度，经度</returns>
 		public static double[] ConvertCGCS2000ToWGS84(double x, double y, int centerLng)
 		{
-			// 定义CGCS2000投影
-			ProjectionInfo cgcs2000 = new ProjectionInfo();
-			switch (centerLng)
-			{
-				case 111:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM111E;
-					break;
-				case 114:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM114E;
-					break;
-				case 117:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM117E;
-					break;
-				case 120:
-					cgcs2000 = KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM120E;
-					break;
-			}
+			//定义CGCS2000投影
+			ProjectionInfo cgcs2000 = projectionInfoDict[centerLng];
 
-			// 定义WGS84地理坐标系
+			//定义WGS84地理坐标系
 			ProjectionInfo wgs84 = KnownCoordinateSystems.Geographic.World.WGS1984;
 
-			// 输入的CGCS2000坐标
+			//输入的CGCS2000坐标
 			double[] xy = new double[] { x, y };
 			double[] z = new double[] { 0 };
 
-			// 执行坐标转换
+			//执行坐标转换
 			Reproject.ReprojectPoints(xy, z, cgcs2000, wgs84, 0, 1);
 
-			// 返回转换后的经纬度
+			//返回转换后的经纬度
 			return new double[] { xy[1], xy[0] }; // 纬度在前，经度在后
+		}
+
+		/// <summary>
+		/// 经纬度坐标转CGCS2000平面坐标（3°带）
+		/// </summary>
+		/// <param name="lat"></param>
+		/// <param name="lng"></param>
+		/// <returns>东坐标，北坐标</returns>
+		public static double[] ConvertWGS84ToCGCS2000(double lat, double lng)
+		{
+			//定义WGS84地理坐标系
+			ProjectionInfo wgs84 = KnownCoordinateSystems.Geographic.World.WGS1984;
+
+			//计算3度带中央子午线
+			int centerLng = 3 * (int)(Math.Round(lng / 3, MidpointRounding.AwayFromZero));
+
+            Console.WriteLine(centerLng);
+
+			//定义CGCS2000投影
+			ProjectionInfo cgcs2000 = projectionInfoDict[centerLng];
+
+			//输入的WGS84坐标
+			double[] lnglat = new double[] { lng, lat };
+			double[] z = new double[] { 0 };
+
+			//执行坐标转换
+			Reproject.ReprojectPoints(lnglat, z, wgs84, cgcs2000, 0, 1);
+
+			Console.WriteLine(lnglat[0]);
+			Console.WriteLine(lnglat[1]);
+
+			//返回转换后的2000坐标
+			return new double[] { lnglat[0], lnglat[1] };
 		}
 
 		/// <summary>

@@ -47,6 +47,7 @@
 			this.SaveKmlCheckedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.DeleteLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToDxfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TianDiTuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TianDiTuImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.BingImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +100,7 @@
             this.TianDiTuImageToolStripMenuItem,
             this.BingImageToolStripMenuItem});
 			this.切换地图ToolStripMenuItem.Name = "切换地图ToolStripMenuItem";
-			this.切换地图ToolStripMenuItem.Size = new System.Drawing.Size(98, 30);
+			this.切换地图ToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
 			this.切换地图ToolStripMenuItem.Text = "切换地图";
 			// 
 			// 基于POS显示图片ToolStripMenuItem1
@@ -108,7 +109,7 @@
             this.HuaceToolStripMenuItem,
             this.DJIToolStripMenuItem});
 			this.基于POS显示图片ToolStripMenuItem1.Name = "基于POS显示图片ToolStripMenuItem1";
-			this.基于POS显示图片ToolStripMenuItem1.Size = new System.Drawing.Size(170, 30);
+			this.基于POS显示图片ToolStripMenuItem1.Size = new System.Drawing.Size(170, 28);
 			this.基于POS显示图片ToolStripMenuItem1.Text = "基于POS显示图片";
 			// 
 			// 画图工具ToolStripMenuItem
@@ -118,7 +119,7 @@
             this.DrawPolylineToolStripMenuItem,
             this.DrawPolygonToolStripMenuItem});
 			this.画图工具ToolStripMenuItem.Name = "画图工具ToolStripMenuItem";
-			this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(98, 30);
+			this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
 			this.画图工具ToolStripMenuItem.Text = "画图工具";
 			// 
 			// kMLToolStripMenuItem
@@ -128,7 +129,7 @@
             this.ImportKmlProToolStripMenuItem,
             this.LL2KmlToolStripMenuItem});
 			this.kMLToolStripMenuItem.Name = "kMLToolStripMenuItem";
-			this.kMLToolStripMenuItem.Size = new System.Drawing.Size(58, 30);
+			this.kMLToolStripMenuItem.Size = new System.Drawing.Size(58, 28);
 			this.kMLToolStripMenuItem.Text = "kml";
 			// 
 			// 小工具ToolStripMenuItem
@@ -139,7 +140,7 @@
             this.DeleteFilesToolStripMenuItem,
             this.ExtractColumnToolStripMenuItem});
 			this.小工具ToolStripMenuItem.Name = "小工具ToolStripMenuItem";
-			this.小工具ToolStripMenuItem.Size = new System.Drawing.Size(80, 30);
+			this.小工具ToolStripMenuItem.Size = new System.Drawing.Size(80, 28);
 			this.小工具ToolStripMenuItem.Text = "小工具";
 			// 
 			// 清除图层ToolStripMenuItem
@@ -157,7 +158,7 @@
             this.AboutToolStripMenuItem,
             this.HelpToolStripMenuItem});
 			this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-			this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(62, 30);
+			this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
 			this.帮助ToolStripMenuItem.Text = "帮助";
 			// 
 			// gMapControl
@@ -220,9 +221,10 @@
             this.SaveKmlToolStripMenuItem,
             this.SaveKmlCheckedToolStripMenuItem,
             this.ExportImageToolStripMenuItem,
-            this.DeleteLayerToolStripMenuItem});
+            this.DeleteLayerToolStripMenuItem,
+            this.ToDxfToolStripMenuItem});
 			this.kmlContextMenuStrip.Name = "kmlContextMenuStrip";
-			this.kmlContextMenuStrip.Size = new System.Drawing.Size(265, 132);
+			this.kmlContextMenuStrip.Size = new System.Drawing.Size(265, 164);
 			// 
 			// SaveKmlToolStripMenuItem
 			// 
@@ -255,6 +257,14 @@
 			this.DeleteLayerToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
 			this.DeleteLayerToolStripMenuItem.Text = "删除图层";
 			this.DeleteLayerToolStripMenuItem.Click += new System.EventHandler(this.DeleteLayerToolStripMenuItem_Click);
+			// 
+			// ToDxfToolStripMenuItem
+			// 
+			this.ToDxfToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.dxf;
+			this.ToDxfToolStripMenuItem.Name = "ToDxfToolStripMenuItem";
+			this.ToDxfToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
+			this.ToDxfToolStripMenuItem.Text = "转换为dxf";
+			this.ToDxfToolStripMenuItem.Click += new System.EventHandler(this.ToDxfToolStripMenuItem_Click);
 			// 
 			// TianDiTuToolStripMenuItem
 			// 
@@ -380,7 +390,7 @@
 			// 
 			this.ClearPOSToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.iov_position;
 			this.ClearPOSToolStripMenuItem.Name = "ClearPOSToolStripMenuItem";
-			this.ClearPOSToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.ClearPOSToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
 			this.ClearPOSToolStripMenuItem.Text = "清除POS图层";
 			this.ClearPOSToolStripMenuItem.Click += new System.EventHandler(this.ClearPOSToolStripMenuItem_Click);
 			// 
@@ -388,7 +398,7 @@
 			// 
 			this.ClearAllToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.删除全部;
 			this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-			this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
 			this.ClearAllToolStripMenuItem.Text = "清除所有图层";
 			this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
 			// 
@@ -470,6 +480,7 @@
 		private System.Windows.Forms.ToolStripMenuItem DrawPolylineToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem DrawPolygonToolStripMenuItem;
 		private System.ComponentModel.BackgroundWorker backgroundWorker;
+		private System.Windows.Forms.ToolStripMenuItem ToDxfToolStripMenuItem;
 	}
 }
 

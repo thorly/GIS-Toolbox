@@ -16,6 +16,8 @@ using System.Linq;
 using GMapTools;
 using GMapDrawTools;
 using System.ComponentModel;
+using IxMilia.Dxf;
+using IxMilia.Dxf.Entities;
 
 
 namespace GIS_Toolbox
@@ -959,6 +961,101 @@ namespace GIS_Toolbox
 				}
 			}
 			draw.IsEnable = false;
+		}
+
+		private void ToDxfToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				Filter = "dxf文件 (*.dxf)|*.dxf",
+				RestoreDirectory = true
+			};
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				//被选中的节点
+				TreeNode selectedNode = this.treeView.SelectedNode;
+
+				foreach (GMapOverlay overlay in this.gMapControl.Overlays)
+				{
+					if (overlay.Id == selectedNode.Name)
+					{
+						string filename = saveFileDialog.FileName;
+
+						//新建dxf文件
+						DxfFile dxfFile = new DxfFile();
+
+						if (overlay.Markers.Count > 0)
+						{
+							foreach (GMapMarker marker in overlay.Markers)
+							{
+								double lat = marker.Position.Lat;
+								double lng = marker.Position.Lng;
+
+								//坐标转换
+								double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+
+								DxfPoint dxfPoint = new DxfPoint(xy[0], xy[1], 0);
+
+								DxfText dxfText = new DxfText(dxfPoint, 50, marker.ToolTipText);
+
+								dxfFile.Entities.Add(dxfText);
+							}
+						}
+
+						if (overlay.Routes.Count > 0)
+						{
+							foreach (GMapRoute route in overlay.Routes)
+							{
+								List<DxfVertex> vertices = new List<DxfVertex>();
+
+								foreach (PointLatLng pointLatLng in route.Points)
+								{
+									double lat = pointLatLng.Lat;
+									double lng = pointLatLng.Lng;
+
+									//坐标转换
+									double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+
+									vertices.Add(new DxfVertex(new DxfPoint(xy[0], xy[1], 0)));
+								}
+
+								DxfPolyline dxfPolyline = new DxfPolyline(vertices);
+
+								dxfFile.Entities.Add(dxfPolyline);
+							}
+						}
+
+						if (overlay.Polygons.Count > 0)
+						{
+							foreach(GMapPolygon polygon in overlay.Polygons)
+							{
+								List<DxfVertex> vertices = new List<DxfVertex>();
+
+								foreach (PointLatLng pointLatLng in polygon.Points)
+								{
+									double lat = pointLatLng.Lat;
+									double lng = pointLatLng.Lng;
+
+									//坐标转换
+									double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+
+									vertices.Add(new DxfVertex(new DxfPoint(xy[0], xy[1], 0)));
+								}
+
+								DxfPolyline dxfPolyline = new DxfPolyline(vertices);
+								dxfPolyline.IsClosed = true;
+
+								dxfFile.Entities.Add(dxfPolyline);
+							}
+						}
+
+						dxfFile.Save(filename);
+					}
+				}
+
+				MessageBox.Show("保存成功", "提示");
+			}
 		}
 	}
 }

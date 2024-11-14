@@ -9,12 +9,13 @@ namespace GIS_Toolbox
 		{
 			InitializeComponent();
 
-			comboBoxCenterLng.Items.Add("111");
-			comboBoxCenterLng.Items.Add("114");
-			comboBoxCenterLng.Items.Add("117");
-			comboBoxCenterLng.Items.Add("120");
+			for (int i = 75; i <= 135; )
+			{
+				comboBoxCenterLng.Items.Add(i);
+				i = i + 3;
+			}
 			
-			comboBoxCenterLng.SelectedIndex = 1;
+			comboBoxCenterLng.SelectedIndex = 13;
 		}
 
 		private void buttonOpen_Click(object sender, EventArgs e)
