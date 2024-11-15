@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotSpatial.Projections, Version=4.0.656.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotSpatial.Projections.4.0.656\lib\netstandard2.0\DotSpatial.Projections.dll</HintPath>
-    </Reference>
     <Reference Include="GMap.NET.Core">
       <HintPath>..\GMap.NET.Core\bin\Debug\GMap.NET.Core.dll</HintPath>
     </Reference>

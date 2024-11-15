@@ -423,8 +423,8 @@ namespace GIS_Toolbox
 							{
 								string[] temp = line.Split();
 
-								double x = double.Parse(temp[1]);
-								double y = double.Parse(temp[2]);
+								double x = double.Parse(temp[2]);
+								double y = double.Parse(temp[1]);
 
 								// 图片路径
 								string imageFile = imageDir + "\\" + temp[0];
@@ -432,9 +432,9 @@ namespace GIS_Toolbox
 								// 检测图片是否存在，不存在则不添加marker
 								if (File.Exists(imageFile))
 								{
-									double[] latlon = Tools.ConvertCGCS2000ToWGS84(x, y, centerLng);
+									Tools.XY2BL(x, y, centerLng, out double B, out double L);
 
-									PointLatLng point = new PointLatLng(latlon[0], latlon[1]);
+									PointLatLng point = new PointLatLng(B, L);
 
 									GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_small);
 									marker.ToolTipText = imageFile;
@@ -501,11 +501,11 @@ namespace GIS_Toolbox
 								{
 									if (tag.Name == "GPS Latitude")
 									{
-										latitude = Tools.ConvertDMSToDecimalDegree(tag.Description);
+										latitude = Tools.DMSToDecimalDegree(tag.Description);
 									}
 									if (tag.Name == "GPS Longitude")
 									{
-										longitude = Tools.ConvertDMSToDecimalDegree(tag.Description);
+										longitude = Tools.DMSToDecimalDegree(tag.Description);
 									}
 								}
 							}
@@ -993,9 +993,9 @@ namespace GIS_Toolbox
 								double lng = marker.Position.Lng;
 
 								//坐标转换
-								double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+								Tools.BL2XY(lat, lng, out double X, out double Y);
 
-								DxfPoint dxfPoint = new DxfPoint(xy[0], xy[1], 0);
+								DxfPoint dxfPoint = new DxfPoint(Y, X, 0);
 
 								DxfText dxfText = new DxfText(dxfPoint, 50, marker.ToolTipText);
 
@@ -1015,9 +1015,11 @@ namespace GIS_Toolbox
 									double lng = pointLatLng.Lng;
 
 									//坐标转换
-									double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+									Tools.BL2XY(lat, lng, out double X, out double Y);
 
-									vertices.Add(new DxfVertex(new DxfPoint(xy[0], xy[1], 0)));
+									Console.WriteLine($"{overlay.Id} {lat} {lng} {X} {Y}");
+
+									vertices.Add(new DxfVertex(new DxfPoint(Y, X, 0)));
 								}
 
 								DxfPolyline dxfPolyline = new DxfPolyline(vertices);
@@ -1038,9 +1040,9 @@ namespace GIS_Toolbox
 									double lng = pointLatLng.Lng;
 
 									//坐标转换
-									double[] xy = Tools.ConvertWGS84ToCGCS2000(lat, lng);
+									Tools.BL2XY(lat, lng, out double X, out double Y);
 
-									vertices.Add(new DxfVertex(new DxfPoint(xy[0], xy[1], 0)));
+									vertices.Add(new DxfVertex(new DxfPoint(Y, X, 0)));
 								}
 
 								DxfPolyline dxfPolyline = new DxfPolyline(vertices);

@@ -1,14 +1,6 @@
-﻿using MetadataExtractor.Formats.Photoshop;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GIS_Toolbox
@@ -39,45 +31,6 @@ namespace GIS_Toolbox
 			}
 
 			return directorys;
-		}
-
-		/// <summary>
-		/// 合并POS文件
-		/// </summary>
-		/// <param name="originalPOS"></param>
-		/// <param name="mergedPOS"></param>
-		/// <param name="firstLine"></param>
-		public static void MergePOS(List<string> originalPOS, string mergedPOS, bool skipFirstLine)
-		{
-			FileInfo outputFile = new FileInfo(mergedPOS);
-			StreamWriter sw = outputFile.CreateText();
-
-			foreach (string file in originalPOS)
-			{
-				if(File.Exists(file))
-				{
-					string[] lines = File.ReadAllLines(file, Encoding.ASCII);
-
-					for (int i = 0; i < lines.Length; i++)
-					{
-						if (skipFirstLine && i == 0)
-						{
-							continue;
-						}
-						else
-						{
-							sw.WriteLine(lines[i]);
-						}
-					}
-				}
-				else
-				{
-					Console.WriteLine($"cannnot find {file}");
-				}
-				
-			}
-
-			sw.Close();
 		}
 
 		private void buttonInput_Click(object sender, EventArgs e)
@@ -152,7 +105,7 @@ namespace GIS_Toolbox
 
 				// 合并POS文件
 				string mergedPOS = outputCamera + "\\Metashape-merged.txt";
-				MergePOS(posFiles, mergedPOS, true);
+				Tools.MergePOS(posFiles, mergedPOS, true);
 
 				MessageBox.Show("完成", "提示");
 			}

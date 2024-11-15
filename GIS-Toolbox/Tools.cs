@@ -1,5 +1,4 @@
-﻿using DotSpatial.Projections;
-using GMap.NET.WindowsForms;
+﻿using GMap.NET.WindowsForms;
 using GMap.NET;
 using SharpKml.Base;
 using SharpKml.Dom;
@@ -16,98 +15,11 @@ namespace GIS_Toolbox
 	public class Tools
 	{
 		/// <summary>
-		/// 3°带中央子午线对应的投影
-		/// </summary>
-		private readonly static Dictionary<int, ProjectionInfo> projectionInfoDict = new Dictionary<int, ProjectionInfo>()
-		{
-			{ 75, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM75E },
-			{ 78, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM78E },
-			{ 81, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM81E },
-			{ 84, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM84E },
-			{ 87, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM87E },
-			{ 90, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM90E },
-			{ 93, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM93E },
-			{ 96, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM96E },
-			{ 99, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM99E },
-			{ 102, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM102E },
-			{ 105, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM105E },
-			{ 108, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM108E },
-			{ 111, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM111E },
-			{ 114, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM114E },
-			{ 117, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM117E },
-			{ 120, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM120E },
-			{ 123, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM123E },
-			{ 126, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM126E },
-			{ 129, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM129E },
-			{ 132, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM132E },
-			{ 135, KnownCoordinateSystems.Projected.KrugerXian1980.Xian19803DegreeGKCM135E }
-		};
-
-		/// <summary>
-		/// CGCS2000平面坐标转经纬度坐标（3°带）
-		/// </summary>
-		/// <param name="x">北坐标</param>
-		/// <param name="y">东坐标</param>
-		/// <param name="centerLng">中央子午线</param>
-		/// <returns>纬度，经度</returns>
-		public static double[] ConvertCGCS2000ToWGS84(double x, double y, int centerLng)
-		{
-			//定义CGCS2000投影
-			ProjectionInfo cgcs2000 = projectionInfoDict[centerLng];
-
-			//定义WGS84地理坐标系
-			ProjectionInfo wgs84 = KnownCoordinateSystems.Geographic.World.WGS1984;
-
-			//输入的CGCS2000坐标
-			double[] xy = new double[] { x, y };
-			double[] z = new double[] { 0 };
-
-			//执行坐标转换
-			Reproject.ReprojectPoints(xy, z, cgcs2000, wgs84, 0, 1);
-
-			//返回转换后的经纬度
-			return new double[] { xy[1], xy[0] }; // 纬度在前，经度在后
-		}
-
-		/// <summary>
-		/// 经纬度坐标转CGCS2000平面坐标（3°带）
-		/// </summary>
-		/// <param name="lat"></param>
-		/// <param name="lng"></param>
-		/// <returns>东坐标，北坐标</returns>
-		public static double[] ConvertWGS84ToCGCS2000(double lat, double lng)
-		{
-			//定义WGS84地理坐标系
-			ProjectionInfo wgs84 = KnownCoordinateSystems.Geographic.World.WGS1984;
-
-			//计算3度带中央子午线
-			int centerLng = 3 * (int)(Math.Round(lng / 3, MidpointRounding.AwayFromZero));
-
-            Console.WriteLine(centerLng);
-
-			//定义CGCS2000投影
-			ProjectionInfo cgcs2000 = projectionInfoDict[centerLng];
-
-			//输入的WGS84坐标
-			double[] lnglat = new double[] { lng, lat };
-			double[] z = new double[] { 0 };
-
-			//执行坐标转换
-			Reproject.ReprojectPoints(lnglat, z, wgs84, cgcs2000, 0, 1);
-
-			Console.WriteLine(lnglat[0]);
-			Console.WriteLine(lnglat[1]);
-
-			//返回转换后的2000坐标
-			return new double[] { lnglat[0], lnglat[1] };
-		}
-
-		/// <summary>
 		/// 度分秒转十进制度
 		/// </summary>
 		/// <param name="value">度分秒</param>
 		/// <returns>十进制度</returns>
-		public static double ConvertDMSToDecimalDegree(string value)
+		public static double DMSToDecimalDegree(string value)
 		{
 			string valueNoSpace = value.Replace(" ", "").Replace('″', '"').Replace("′", "'");
 
@@ -142,6 +54,31 @@ namespace GIS_Toolbox
 			return decimalDegree;
 		}
 
+		/// <summary>
+		/// 十进制度转弧度
+		/// </summary>
+		/// <param name="degree"></param>
+		/// <returns></returns>
+		public static double DecimalDegree2RAD(double degree)
+		{
+			return degree * Math.PI / 180.0;
+		}
+
+		/// <summary>
+		/// 弧度转十进制度
+		/// </summary>
+		/// <param name="rad"></param>
+		/// <returns></returns>
+		public static double RAD2DecimalDegree(double rad)
+		{
+			return rad * 180.0 / Math.PI;
+		}
+
+		/// <summary>
+		/// 保存kml文件
+		/// </summary>
+		/// <param name="mapOverlay">图层</param>
+		/// <param name="filename">输出kml文件</param>
 		public static void SaveKmlFile(GMapOverlay mapOverlay, string filename)
 		{
 			//创建kml文件
@@ -210,6 +147,12 @@ namespace GIS_Toolbox
 			KmlFile.Create(root, false).Save(filename);
 		}
 
+		/// <summary>
+		/// 添加子节点
+		/// </summary>
+		/// <param name="parentNode">父节点</param>
+		/// <param name="nodeName"></param>
+		/// <param name="nodeText"></param>
 		public static void addChildNode(TreeNode parentNode, string nodeName, string nodeText)
 		{
 			TreeNode childNode = new TreeNode(nodeName)
@@ -304,6 +247,125 @@ namespace GIS_Toolbox
 			}
 
 			return pos;
+		}
+
+		/// <summary>
+		/// 经纬度坐标转2000平面坐标（高斯投影）
+		/// </summary>
+		/// <param name="B">纬度</param>
+		/// <param name="L">经度</param>
+		/// <param name="X">北坐标</param>
+		/// <param name="Y">东坐标</param>
+		public static void BL2XY(double B, double L, out double X, out double Y)
+		{
+			//2000椭球参数
+			double aa = 6378137.000000;
+			double af = 298.257222101;
+
+			double ll, C, A, v, M, bb, e;
+			double e1, T;
+
+			//中央子午线
+			double L0 = 3 * (int)(Math.Round(L / 3, MidpointRounding.AwayFromZero));
+
+			B = DecimalDegree2RAD(B);
+			L = DecimalDegree2RAD(L);
+			L0 = DecimalDegree2RAD(L0);
+
+			double X0 = 0.0;
+			double Y0 = 500000.0;
+
+			ll = L - L0;
+
+			int nSignOfB = 1;
+			if (B < 0) nSignOfB = -1;
+			B = Math.Abs(B);
+
+			bb = (1 - 1.0 / af) * aa;
+			e = Math.Sqrt(1.0 - (bb / aa * bb / aa));
+			e1 = Math.Sqrt(aa / bb * aa / bb - 1.0);
+
+			T = Math.Tan(B) * Math.Tan(B);
+			C = e * e * Math.Cos(B) * Math.Cos(B) / (1 - e * e);
+			A = ll * Math.Cos(B);
+			v = aa / Math.Sqrt(1 - e * e * Math.Sin(B) * Math.Sin(B));
+			M = aa * ((1 - e * e / 4.0 - (3.0 / 64.0) * Math.Pow(e, 4) - (5.0 / 256.0) * Math.Pow(e, 6)) * B
+				- ((3.0 / 8.0) * e * e + (3.0 / 32.0) * Math.Pow(e, 4) + (45.0 / 1024.0) * Math.Pow(e, 6)) * Math.Sin(2 * B)
+				+ ((15.0 / 256.0) * Math.Pow(e, 4) + (45.0 / 1024.0) * Math.Pow(e, 6)) * Math.Sin(4 * B)
+				- ((35.0 / 3072.0) * Math.Pow(e, 6)) * Math.Sin(6 * B));
+
+			X = (M + v * Math.Tan(B) * (A * A / 2.0 + (5.0 - T + 9.0 * C + 4 * C * C) * A * A * A * A / 24.0
+				+ (61.0 - 58.0 * T + T * T + 600.0 * C - 330 * e1 * e1) * A * A * A * A * A * A / 720.0));
+			Y = v * (A + (1 - T + C) * A * A * A / 6.0 + (5.0 - 18.0 * T + T * T + 72.0 * C - 58.0 * e1 * e1) * A * A * A * A * A / 120.0);
+
+			X = nSignOfB * X;
+
+			X = X + X0;
+			Y = Y + Y0;
+		}
+
+		/// <summary>
+		/// 2000平面坐标转经纬度坐标（高斯投影）
+		/// </summary>
+		/// <param name="X">北坐标</param>
+		/// <param name="Y">东坐标</param>
+		/// <param name="L0">中央子午线</param>
+		/// <param name="B">纬度</param>
+		/// <param name="L">经度</param>
+		public static void XY2BL(double X, double Y, double L0, out double B, out double L)
+		{
+			//84椭球参数
+			double aa = 6378137.000000;
+			double af = 298.257223563;
+
+			double bb, e, e1;
+			double M1, u1, phi1, T1, C1, v1, p1, D, e2, e12;
+
+			double X0 = 0.0;
+			double Y0 = 500000.0;
+
+			X = X - X0;
+			Y = Y - Y0;
+			B = 0;
+			L = 0;
+
+			int nSignOfX = 1;
+			if (X < 0)
+				nSignOfX = -1;
+
+			X = Math.Abs(X);    //change negative value to positive
+
+			bb = (1 - 1.0 / af) * aa;
+			e = Math.Sqrt(1.0 - (bb / aa * bb / aa));  //sqrt(aa*aa-bb*bb)/aa
+			e1 = Math.Sqrt(aa / bb * aa / bb - 1.0);
+
+			e2 = 2 / af - 1 / af / af;
+			e1 = (1 - Math.Sqrt(1 - e2)) / (1 + Math.Sqrt(1 - e2));
+			e12 = e2 / (1 - e2);
+			M1 = X;
+			u1 = M1 / (aa * (1 - e2 / 4.0 - (3.0 / 64.0) * e2 * e2 - (5.0 / 256.0) * e2 * e2 * e2));
+			phi1 = u1 + (1.5 * e1 - (27.0 / 32.0) * e1 * e1 * e1) * Math.Sin(2 * u1) + ((21.0 / 16.0) 
+				* e1 * e1 - (55.0 / 32.0) * e1 * e1 * e1 * e1) * Math.Sin(4 * u1) + ((151.0 / 96.0) 
+				* e1 * e1 * e1) * Math.Sin(6 * u1) + ((1097.0 / 512.0) * e1 * e1 * e1 * e1) * Math.Sin(8 * u1);
+			T1 = Math.Tan(phi1) * Math.Tan(phi1);
+			C1 = e12 * Math.Cos(phi1) * Math.Cos(phi1);
+			v1 = aa / Math.Sqrt((1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)));
+			p1 = aa * (1 - e2) / Math.Sqrt((1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)) * (1 - e2 
+				* Math.Sin(phi1) * Math.Sin(phi1)) * (1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)));
+			D = Y / v1;
+
+			B = phi1 - (v1 * Math.Tan(phi1) / p1) * (D * D / 2.0 - (5.0 + 3.0 * T1 + 10.0 * C1 - 4.0 
+				* C1 * C1 - 9.0 * e12) * D * D * D * D / 24.0 + (61 + 90 * T1 + 298 * C1 + 45 * T1 
+				* T1 - 252 * e12 - 3 * C1 * C1) * D * D * D * D * D * D / 720.0);
+			L = (D - (1 + 2.0 * T1 + C1) * D * D * D / 6.0 + (5.0 - 2.0 * C1 + 28.0 * T1 - 3 * C1 
+				* C1 + 8 * e12 + 24 * T1 * T1) * D * D * D * D * D / 120.0) / Math.Cos(phi1);
+			B = nSignOfX * B;
+
+			L0 = DecimalDegree2RAD(L0);
+			L = L + L0;
+
+			B = RAD2DecimalDegree(B);
+			L = RAD2DecimalDegree(L);
 		}
 	}
 }

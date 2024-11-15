@@ -76,7 +76,7 @@ namespace GIS_Toolbox
 			}
 
 			List<string> posFiles = textBoxInputFiles.Lines.ToList();
-			OrganizeForm.MergePOS(posFiles, textBoxOutputFile.Text, checkBoxFirstLine.Checked);
+			Tools.MergePOS(posFiles, textBoxOutputFile.Text, checkBoxFirstLine.Checked);
 
 			MessageBox.Show("合并成功！", "提示");
 		}

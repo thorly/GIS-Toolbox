@@ -178,8 +178,8 @@ namespace GIS_Toolbox
 					}
 					else
 					{
-						lat = Tools.ConvertDMSToDecimalDegree(latString);
-						lng = Tools.ConvertDMSToDecimalDegree(lngString);
+						lat = Tools.DMSToDecimalDegree(latString);
+						lng = Tools.DMSToDecimalDegree(lngString);
 					}
 
 					Placemark feature = new Placemark();
