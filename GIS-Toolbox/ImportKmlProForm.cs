@@ -8,7 +8,7 @@ namespace GIS_Toolbox
 {
 	public partial class ImportKmlProForm : Form
 	{
-		private readonly Dictionary<int, GMarkerGoogleType> MarkerTypeDict = new Dictionary<int, GMarkerGoogleType>()
+		public static readonly Dictionary<int, GMarkerGoogleType> MarkerTypeDict = new Dictionary<int, GMarkerGoogleType>()
 		{
 			{0, GMarkerGoogleType.blue_small },
 			{1, GMarkerGoogleType.blue_pushpin },
@@ -20,7 +20,7 @@ namespace GIS_Toolbox
 			{7, GMarkerGoogleType.orange_dot },
 		};
 
-		private readonly Dictionary<int, Color> LineColorDict = new Dictionary<int, Color>()
+		public static readonly Dictionary<int, Color> LineColorDict = new Dictionary<int, Color>()
 		{
 			{0, Color.Red },
 			{1, Color.Blue },

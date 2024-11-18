@@ -41,9 +41,9 @@
 			// 
 			// buttonStart
 			// 
-			this.buttonStart.Location = new System.Drawing.Point(881, 29);
+			this.buttonStart.Location = new System.Drawing.Point(923, 57);
 			this.buttonStart.Name = "buttonStart";
-			this.buttonStart.Size = new System.Drawing.Size(80, 79);
+			this.buttonStart.Size = new System.Drawing.Size(96, 95);
 			this.buttonStart.TabIndex = 0;
 			this.buttonStart.Text = "开始";
 			this.buttonStart.UseVisualStyleBackColor = true;
@@ -52,7 +52,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(21, 36);
+			this.label1.Location = new System.Drawing.Point(47, 64);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(0, 18);
 			this.label1.TabIndex = 1;
@@ -60,7 +60,7 @@
 			// textBoxInput
 			// 
 			this.textBoxInput.Enabled = false;
-			this.textBoxInput.Location = new System.Drawing.Point(147, 26);
+			this.textBoxInput.Location = new System.Drawing.Point(173, 54);
 			this.textBoxInput.Name = "textBoxInput";
 			this.textBoxInput.Size = new System.Drawing.Size(608, 28);
 			this.textBoxInput.TabIndex = 2;
@@ -68,7 +68,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(21, 29);
+			this.label2.Location = new System.Drawing.Point(33, 60);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(134, 18);
 			this.label2.TabIndex = 1;
@@ -77,7 +77,7 @@
 			// textBoxOutput
 			// 
 			this.textBoxOutput.Enabled = false;
-			this.textBoxOutput.Location = new System.Drawing.Point(147, 77);
+			this.textBoxOutput.Location = new System.Drawing.Point(173, 124);
 			this.textBoxOutput.Name = "textBoxOutput";
 			this.textBoxOutput.Size = new System.Drawing.Size(608, 28);
 			this.textBoxOutput.TabIndex = 2;
@@ -85,7 +85,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(21, 80);
+			this.label3.Location = new System.Drawing.Point(69, 127);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(98, 18);
 			this.label3.TabIndex = 1;
@@ -93,7 +93,7 @@
 			// 
 			// buttonInput
 			// 
-			this.buttonInput.Location = new System.Drawing.Point(777, 26);
+			this.buttonInput.Location = new System.Drawing.Point(803, 54);
 			this.buttonInput.Name = "buttonInput";
 			this.buttonInput.Size = new System.Drawing.Size(75, 31);
 			this.buttonInput.TabIndex = 3;
@@ -103,7 +103,7 @@
 			// 
 			// buttonOutput
 			// 
-			this.buttonOutput.Location = new System.Drawing.Point(777, 77);
+			this.buttonOutput.Location = new System.Drawing.Point(803, 124);
 			this.buttonOutput.Name = "buttonOutput";
 			this.buttonOutput.Size = new System.Drawing.Size(75, 30);
 			this.buttonOutput.TabIndex = 3;
@@ -115,7 +115,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(987, 142);
+			this.ClientSize = new System.Drawing.Size(1067, 208);
 			this.Controls.Add(this.buttonOutput);
 			this.Controls.Add(this.buttonInput);
 			this.Controls.Add(this.textBoxOutput);

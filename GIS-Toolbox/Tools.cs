@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using GMap.NET.WindowsForms.Markers;
+using System.Drawing;
 
 namespace GIS_Toolbox
 {
@@ -90,7 +92,7 @@ namespace GIS_Toolbox
 				foreach (GMapMarker marker in mapOverlay.Markers)
 				{
 					Placemark feature = new Placemark();
-					Point point = new Point
+					SharpKml.Dom.Point point = new SharpKml.Dom.Point
 					{
 						Coordinate = new Vector(marker.Position.Lat, marker.Position.Lng)
 					};
@@ -344,20 +346,20 @@ namespace GIS_Toolbox
 			e12 = e2 / (1 - e2);
 			M1 = X;
 			u1 = M1 / (aa * (1 - e2 / 4.0 - (3.0 / 64.0) * e2 * e2 - (5.0 / 256.0) * e2 * e2 * e2));
-			phi1 = u1 + (1.5 * e1 - (27.0 / 32.0) * e1 * e1 * e1) * Math.Sin(2 * u1) + ((21.0 / 16.0) 
-				* e1 * e1 - (55.0 / 32.0) * e1 * e1 * e1 * e1) * Math.Sin(4 * u1) + ((151.0 / 96.0) 
+			phi1 = u1 + (1.5 * e1 - (27.0 / 32.0) * e1 * e1 * e1) * Math.Sin(2 * u1) + ((21.0 / 16.0)
+				* e1 * e1 - (55.0 / 32.0) * e1 * e1 * e1 * e1) * Math.Sin(4 * u1) + ((151.0 / 96.0)
 				* e1 * e1 * e1) * Math.Sin(6 * u1) + ((1097.0 / 512.0) * e1 * e1 * e1 * e1) * Math.Sin(8 * u1);
 			T1 = Math.Tan(phi1) * Math.Tan(phi1);
 			C1 = e12 * Math.Cos(phi1) * Math.Cos(phi1);
 			v1 = aa / Math.Sqrt((1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)));
-			p1 = aa * (1 - e2) / Math.Sqrt((1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)) * (1 - e2 
+			p1 = aa * (1 - e2) / Math.Sqrt((1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)) * (1 - e2
 				* Math.Sin(phi1) * Math.Sin(phi1)) * (1 - e2 * Math.Sin(phi1) * Math.Sin(phi1)));
 			D = Y / v1;
 
-			B = phi1 - (v1 * Math.Tan(phi1) / p1) * (D * D / 2.0 - (5.0 + 3.0 * T1 + 10.0 * C1 - 4.0 
-				* C1 * C1 - 9.0 * e12) * D * D * D * D / 24.0 + (61 + 90 * T1 + 298 * C1 + 45 * T1 
+			B = phi1 - (v1 * Math.Tan(phi1) / p1) * (D * D / 2.0 - (5.0 + 3.0 * T1 + 10.0 * C1 - 4.0
+				* C1 * C1 - 9.0 * e12) * D * D * D * D / 24.0 + (61 + 90 * T1 + 298 * C1 + 45 * T1
 				* T1 - 252 * e12 - 3 * C1 * C1) * D * D * D * D * D * D / 720.0);
-			L = (D - (1 + 2.0 * T1 + C1) * D * D * D / 6.0 + (5.0 - 2.0 * C1 + 28.0 * T1 - 3 * C1 
+			L = (D - (1 + 2.0 * T1 + C1) * D * D * D / 6.0 + (5.0 - 2.0 * C1 + 28.0 * T1 - 3 * C1
 				* C1 + 8 * e12 + 24 * T1 * T1) * D * D * D * D * D / 120.0) / Math.Cos(phi1);
 			B = nSignOfX * B;
 
@@ -366,6 +368,98 @@ namespace GIS_Toolbox
 
 			B = RAD2DecimalDegree(B);
 			L = RAD2DecimalDegree(L);
+		}
+
+		/// <summary>
+		/// 获取多个闭合多边形的Bounding Box
+		/// </summary>
+		/// <param name="polygons">多边形</param>
+		/// <returns>Bounding Box</returns>
+		public static GMapPolygon GetBoundingPolygon(List<GMapPolygon> polygons)
+		{
+			double latMin = polygons[0].Points[0].Lat;
+			double latMax = polygons[0].Points[0].Lat;
+			double lngMin = polygons[0].Points[0].Lng;
+			double lngMax = polygons[0].Points[0].Lng;
+
+			foreach (GMapPolygon polygon in polygons)
+			{
+				foreach (PointLatLng point in polygon.Points)
+				{
+					double lat = point.Lat;
+					double lng = point.Lng;
+
+					if (lat >= latMax)
+					{
+						latMax = lat;
+					}
+
+					if (lat <= latMin)
+					{
+						latMin = lat;
+					}
+
+					if (lng >= lngMax)
+					{
+						lngMax = lng;
+					}
+
+					if (lng <= lngMin)
+					{
+						lngMin = lng;
+					}
+				}
+			}
+
+			//BoundingBox四个角点
+			PointLatLng pointBL = new PointLatLng(latMin, lngMin);
+			PointLatLng pointBR = new PointLatLng(latMin, lngMax);
+			PointLatLng pointUL = new PointLatLng(latMax, lngMin);
+			PointLatLng pointUR = new PointLatLng(latMax, lngMax);
+
+			List<PointLatLng> boundingPoints = new List<PointLatLng>
+			{
+				pointBL,
+				pointBR,
+				pointUR,
+				pointUL
+			};
+
+			//闭合多边形
+			GMapPolygon boundingPolygon = new GMapPolygon(boundingPoints, "boundingPolygon");
+
+			return boundingPolygon;
+		}
+
+
+		public static int FindKeyUsingMarkerType(Dictionary<int, GMarkerGoogleType> markerTypeDict, GMarkerGoogleType makerType)
+		{
+			int k = 999;
+
+			foreach (int key in markerTypeDict.Keys)
+			{
+				if (markerTypeDict[key] == makerType)
+				{
+					k = key;
+				}
+			}
+
+			return k;
+		}
+
+		public static int FindKeyUsingColor(Dictionary<int, Color> lineColorDict, Color color)
+		{
+			int k = 999;
+
+			foreach (int key in lineColorDict.Keys)
+			{
+				if (lineColorDict[key] == color)
+				{
+					k = key;
+				}
+			}
+
+			return k;
 		}
 	}
 }

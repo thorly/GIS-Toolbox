@@ -203,6 +203,16 @@ namespace GIS_Toolbox.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Zoomin {
+            get {
+                object obj = ResourceManager.GetObject("Zoomin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 删除全部 {
             get {
                 object obj = ResourceManager.GetObject("删除全部", resourceCulture);
