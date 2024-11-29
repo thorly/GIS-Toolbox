@@ -75,7 +75,7 @@
 			// checkBoxDisplay
 			// 
 			this.checkBoxDisplay.AutoSize = true;
-			this.checkBoxDisplay.Location = new System.Drawing.Point(10, 58);
+			this.checkBoxDisplay.Location = new System.Drawing.Point(22, 58);
 			this.checkBoxDisplay.Name = "checkBoxDisplay";
 			this.checkBoxDisplay.Size = new System.Drawing.Size(196, 22);
 			this.checkBoxDisplay.TabIndex = 3;
@@ -85,7 +85,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(228, 59);
+			this.label2.Location = new System.Drawing.Point(240, 59);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(116, 18);
 			this.label2.TabIndex = 4;
@@ -94,16 +94,16 @@
 			// comboBoxMarkerStyle
 			// 
 			this.comboBoxMarkerStyle.FormattingEnabled = true;
-			this.comboBoxMarkerStyle.Location = new System.Drawing.Point(350, 56);
+			this.comboBoxMarkerStyle.Location = new System.Drawing.Point(362, 56);
 			this.comboBoxMarkerStyle.Name = "comboBoxMarkerStyle";
 			this.comboBoxMarkerStyle.Size = new System.Drawing.Size(121, 26);
 			this.comboBoxMarkerStyle.TabIndex = 5;
 			// 
 			// buttonImport
 			// 
-			this.buttonImport.Location = new System.Drawing.Point(779, 34);
+			this.buttonImport.Location = new System.Drawing.Point(779, 54);
 			this.buttonImport.Name = "buttonImport";
-			this.buttonImport.Size = new System.Drawing.Size(75, 68);
+			this.buttonImport.Size = new System.Drawing.Size(75, 28);
 			this.buttonImport.TabIndex = 6;
 			this.buttonImport.Text = "导入";
 			this.buttonImport.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@
 			// comboBoxLineColor
 			// 
 			this.comboBoxLineColor.FormattingEnabled = true;
-			this.comboBoxLineColor.Location = new System.Drawing.Point(605, 56);
+			this.comboBoxLineColor.Location = new System.Drawing.Point(617, 56);
 			this.comboBoxLineColor.Name = "comboBoxLineColor";
 			this.comboBoxLineColor.Size = new System.Drawing.Size(121, 26);
 			this.comboBoxLineColor.TabIndex = 8;
@@ -158,7 +158,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(501, 59);
+			this.label3.Location = new System.Drawing.Point(513, 59);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(98, 18);
 			this.label3.TabIndex = 7;

@@ -64,7 +64,7 @@ namespace GIS_Toolbox
 
 			if (textBoxInput.Text == "" || textBoxOutput.Text == "")
 			{
-				MessageBox.Show("请设置文件夹路径", "警告");
+				MessageBox.Show("请设置文件夹路径", "提示");
 			}
 			else
 			{
@@ -84,7 +84,7 @@ namespace GIS_Toolbox
 					directoryInfo.MoveTo(outputScanner + $"\\Scanner-{index + 1}");
 				}
 
-				// 移动照片数据
+				//移动照片数据
 				List<string> cameras = GetDirectoryByName(textBoxInput.Text, "Camera1");
 				List<string> posFiles = new List<string>();
 
@@ -103,7 +103,7 @@ namespace GIS_Toolbox
 					posFiles.Add(outputCamera + $"\\Camera-{index + 1}\\Metashape.txt");
 				}
 
-				// 合并POS文件
+				//合并POS文件
 				string mergedPOS = outputCamera + "\\Metashape-merged.txt";
 				Tools.MergePOS(posFiles, mergedPOS, true);
 

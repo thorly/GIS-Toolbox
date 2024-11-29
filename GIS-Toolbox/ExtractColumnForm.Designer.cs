@@ -63,9 +63,9 @@
 			// 
 			// buttonImportFile
 			// 
-			this.buttonImportFile.Location = new System.Drawing.Point(18, 30);
+			this.buttonImportFile.Location = new System.Drawing.Point(21, 37);
 			this.buttonImportFile.Name = "buttonImportFile";
-			this.buttonImportFile.Size = new System.Drawing.Size(137, 42);
+			this.buttonImportFile.Size = new System.Drawing.Size(137, 29);
 			this.buttonImportFile.TabIndex = 1;
 			this.buttonImportFile.Text = "导入文本文件";
 			this.buttonImportFile.UseVisualStyleBackColor = true;
@@ -163,9 +163,9 @@
 			// 
 			// buttonExport
 			// 
-			this.buttonExport.Location = new System.Drawing.Point(625, 33);
+			this.buttonExport.Location = new System.Drawing.Point(626, 37);
 			this.buttonExport.Name = "buttonExport";
-			this.buttonExport.Size = new System.Drawing.Size(75, 37);
+			this.buttonExport.Size = new System.Drawing.Size(75, 31);
 			this.buttonExport.TabIndex = 5;
 			this.buttonExport.Text = "导出";
 			this.buttonExport.UseVisualStyleBackColor = true;

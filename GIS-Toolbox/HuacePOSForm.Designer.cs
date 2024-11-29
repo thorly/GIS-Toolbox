@@ -71,9 +71,9 @@
 			// 
 			// buttonImport
 			// 
-			this.buttonImport.Location = new System.Drawing.Point(849, 28);
+			this.buttonImport.Location = new System.Drawing.Point(849, 39);
 			this.buttonImport.Name = "buttonImport";
-			this.buttonImport.Size = new System.Drawing.Size(75, 50);
+			this.buttonImport.Size = new System.Drawing.Size(75, 35);
 			this.buttonImport.TabIndex = 1;
 			this.buttonImport.Text = "导入";
 			this.buttonImport.UseVisualStyleBackColor = true;

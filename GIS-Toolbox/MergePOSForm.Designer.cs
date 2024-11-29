@@ -55,11 +55,11 @@
 			// 
 			// buttonAddFile
 			// 
-			this.buttonAddFile.Location = new System.Drawing.Point(801, 31);
+			this.buttonAddFile.Location = new System.Drawing.Point(1008, 113);
 			this.buttonAddFile.Name = "buttonAddFile";
-			this.buttonAddFile.Size = new System.Drawing.Size(127, 33);
+			this.buttonAddFile.Size = new System.Drawing.Size(72, 33);
 			this.buttonAddFile.TabIndex = 1;
-			this.buttonAddFile.Text = "添加文件";
+			this.buttonAddFile.Text = "添加";
 			this.buttonAddFile.UseVisualStyleBackColor = true;
 			this.buttonAddFile.Click += new System.EventHandler(this.buttonAddFile_Click);
 			// 
@@ -68,7 +68,7 @@
 			this.textBoxInputFiles.Location = new System.Drawing.Point(154, 27);
 			this.textBoxInputFiles.Multiline = true;
 			this.textBoxInputFiles.Name = "textBoxInputFiles";
-			this.textBoxInputFiles.Size = new System.Drawing.Size(588, 269);
+			this.textBoxInputFiles.Size = new System.Drawing.Size(816, 269);
 			this.textBoxInputFiles.TabIndex = 2;
 			// 
 			// label2
@@ -84,12 +84,12 @@
 			// 
 			this.textBoxOutputFile.Location = new System.Drawing.Point(153, 49);
 			this.textBoxOutputFile.Name = "textBoxOutputFile";
-			this.textBoxOutputFile.Size = new System.Drawing.Size(491, 28);
+			this.textBoxOutputFile.Size = new System.Drawing.Size(545, 28);
 			this.textBoxOutputFile.TabIndex = 3;
 			// 
 			// buttonSetOutput
 			// 
-			this.buttonSetOutput.Location = new System.Drawing.Point(673, 48);
+			this.buttonSetOutput.Location = new System.Drawing.Point(718, 49);
 			this.buttonSetOutput.Name = "buttonSetOutput";
 			this.buttonSetOutput.Size = new System.Drawing.Size(68, 31);
 			this.buttonSetOutput.TabIndex = 1;
@@ -100,7 +100,7 @@
 			// checkBoxFirstLine
 			// 
 			this.checkBoxFirstLine.AutoSize = true;
-			this.checkBoxFirstLine.Location = new System.Drawing.Point(614, 111);
+			this.checkBoxFirstLine.Location = new System.Drawing.Point(827, 52);
 			this.checkBoxFirstLine.Name = "checkBoxFirstLine";
 			this.checkBoxFirstLine.Size = new System.Drawing.Size(142, 22);
 			this.checkBoxFirstLine.TabIndex = 4;
@@ -109,21 +109,21 @@
 			// 
 			// buttonMerge
 			// 
-			this.buttonMerge.Location = new System.Drawing.Point(800, 40);
+			this.buttonMerge.Location = new System.Drawing.Point(1007, 46);
 			this.buttonMerge.Name = "buttonMerge";
-			this.buttonMerge.Size = new System.Drawing.Size(127, 93);
+			this.buttonMerge.Size = new System.Drawing.Size(72, 33);
 			this.buttonMerge.TabIndex = 5;
-			this.buttonMerge.Text = "合并POS文件";
+			this.buttonMerge.Text = "合并";
 			this.buttonMerge.UseVisualStyleBackColor = true;
 			this.buttonMerge.Click += new System.EventHandler(this.buttonMerge_Click);
 			// 
 			// buttonDeleteAll
 			// 
-			this.buttonDeleteAll.Location = new System.Drawing.Point(801, 86);
+			this.buttonDeleteAll.Location = new System.Drawing.Point(1008, 181);
 			this.buttonDeleteAll.Name = "buttonDeleteAll";
-			this.buttonDeleteAll.Size = new System.Drawing.Size(127, 33);
+			this.buttonDeleteAll.Size = new System.Drawing.Size(72, 33);
 			this.buttonDeleteAll.TabIndex = 6;
-			this.buttonDeleteAll.Text = "清除文件";
+			this.buttonDeleteAll.Text = "清除";
 			this.buttonDeleteAll.UseVisualStyleBackColor = true;
 			this.buttonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
 			// 
@@ -135,7 +135,7 @@
 			this.groupBox1.Controls.Add(this.textBoxInputFiles);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(967, 321);
+			this.groupBox1.Size = new System.Drawing.Size(1117, 321);
 			this.groupBox1.TabIndex = 7;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "输入";
@@ -149,7 +149,7 @@
 			this.groupBox2.Controls.Add(this.checkBoxFirstLine);
 			this.groupBox2.Location = new System.Drawing.Point(13, 350);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(966, 156);
+			this.groupBox2.Size = new System.Drawing.Size(1114, 118);
 			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "输出";
@@ -158,7 +158,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(997, 541);
+			this.ClientSize = new System.Drawing.Size(1141, 480);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

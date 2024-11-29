@@ -233,6 +233,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\多边形.png" />
+    <None Include="Resources\转换.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -264,73 +266,58 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\kml.png" />
+    <None Include="Resources\删除.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\export.png" />
+    <None Include="Resources\合并.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\delete.png" />
+    <None Include="Resources\列.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\map.png" />
+    <None Include="Resources\整理.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dji.png" />
+    <None Include="Resources\帮助.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DJI Mavic Pro.png" />
+    <None Include="Resources\关于.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\无人机.png" />
+    <None Include="Resources\距离.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\地图测距.png" />
+    <None Include="Resources\线段.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\绘制多段线.png" />
+    <None Include="Resources\雷达.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\多边形.png" />
+    <None Include="Resources\摄像机.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\提取.png" />
+    <None Include="Resources\KML.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\merge.png" />
+    <None Include="Resources\保存.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\organize.png" />
+    <None Include="Resources\图片.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\help.png" />
+    <None Include="Resources\缩放.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\about.png" />
+    <None Include="Resources\dxf文件.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\转换.png" />
+    <None Include="Resources\地图.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bing.png" />
+    <None Include="Resources\必应.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\卫星地图.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\view-column.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\删除全部.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iov-position.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\dxf.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Zoomin.png" />
+    <None Include="Resources\星球.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

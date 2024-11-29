@@ -9,13 +9,17 @@ namespace GIS_Toolbox
 		{
 			InitializeComponent();
 
+			//添加3度带中央子午线
 			for (int i = 75; i <= 135; )
 			{
-				comboBoxCenterLng.Items.Add(i);
+				this.comboBoxCenterLng.Items.Add(i);
 				i = i + 3;
 			}
+
+			//默认选择114
+			this.comboBoxCenterLng.SelectedIndex = 13;
 			
-			comboBoxCenterLng.SelectedIndex = 13;
+			this.textBoxImageDir.Enabled = false;
 		}
 
 		private void buttonOpen_Click(object sender, EventArgs e)
@@ -25,7 +29,7 @@ namespace GIS_Toolbox
 
 			if (dialog.ShowDialog(this.Handle))
 			{
-				int length1 = textBoxImageDir.Lines.Length;
+				int length1 = this.textBoxImageDir.Lines.Length;
 
 				if (length1 != 0)
 				{
@@ -33,14 +37,14 @@ namespace GIS_Toolbox
 
 					string[] tempArray = new string[length1 + length2];
 
-					Array.Copy(textBoxImageDir.Lines, tempArray, length1);
+					Array.Copy(this.textBoxImageDir.Lines, tempArray, length1);
 					Array.Copy(dialog.FileNames, 0, tempArray, length1, length2);
 
-					textBoxImageDir.Lines = tempArray;
+					this.textBoxImageDir.Lines = tempArray;
 				}
 				else
 				{
-					textBoxImageDir.Lines = dialog.FileNames;
+					this.textBoxImageDir.Lines = dialog.FileNames;
 				}
 			}
 		}
@@ -53,12 +57,12 @@ namespace GIS_Toolbox
 
 		public string[] getImageDir()
 		{
-			return textBoxImageDir.Lines;
+			return this.textBoxImageDir.Lines;
 		}
 		
 		public string getCenterLng()
 		{
-			return comboBoxCenterLng.Text;
+			return this.comboBoxCenterLng.Text;
 		}
 
 		private void buttonClear_Click(object sender, EventArgs e)
