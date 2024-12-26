@@ -1,6 +1,6 @@
 ﻿namespace GIS_Toolbox
 {
-	partial class OrganizeForm
+	partial class OrganizeHuaceForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizeForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizeHuaceForm));
 			this.buttonStart = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.textBoxInput = new System.Windows.Forms.TextBox();
@@ -41,9 +41,9 @@
 			// 
 			// buttonStart
 			// 
-			this.buttonStart.Location = new System.Drawing.Point(923, 57);
+			this.buttonStart.Location = new System.Drawing.Point(920, 51);
 			this.buttonStart.Name = "buttonStart";
-			this.buttonStart.Size = new System.Drawing.Size(96, 95);
+			this.buttonStart.Size = new System.Drawing.Size(104, 104);
 			this.buttonStart.TabIndex = 0;
 			this.buttonStart.Text = "开始";
 			this.buttonStart.UseVisualStyleBackColor = true;
@@ -59,7 +59,6 @@
 			// 
 			// textBoxInput
 			// 
-			this.textBoxInput.Enabled = false;
 			this.textBoxInput.Location = new System.Drawing.Point(173, 54);
 			this.textBoxInput.Name = "textBoxInput";
 			this.textBoxInput.Size = new System.Drawing.Size(608, 28);
@@ -76,7 +75,6 @@
 			// 
 			// textBoxOutput
 			// 
-			this.textBoxOutput.Enabled = false;
 			this.textBoxOutput.Location = new System.Drawing.Point(173, 124);
 			this.textBoxOutput.Name = "textBoxOutput";
 			this.textBoxOutput.Size = new System.Drawing.Size(608, 28);
@@ -93,9 +91,9 @@
 			// 
 			// buttonInput
 			// 
-			this.buttonInput.Location = new System.Drawing.Point(813, 54);
+			this.buttonInput.Location = new System.Drawing.Point(813, 51);
 			this.buttonInput.Name = "buttonInput";
-			this.buttonInput.Size = new System.Drawing.Size(75, 31);
+			this.buttonInput.Size = new System.Drawing.Size(61, 33);
 			this.buttonInput.TabIndex = 3;
 			this.buttonInput.Text = "...";
 			this.buttonInput.UseVisualStyleBackColor = true;
@@ -103,15 +101,15 @@
 			// 
 			// buttonOutput
 			// 
-			this.buttonOutput.Location = new System.Drawing.Point(813, 124);
+			this.buttonOutput.Location = new System.Drawing.Point(813, 122);
 			this.buttonOutput.Name = "buttonOutput";
-			this.buttonOutput.Size = new System.Drawing.Size(75, 30);
+			this.buttonOutput.Size = new System.Drawing.Size(61, 33);
 			this.buttonOutput.TabIndex = 3;
 			this.buttonOutput.Text = "...";
 			this.buttonOutput.UseVisualStyleBackColor = true;
 			this.buttonOutput.Click += new System.EventHandler(this.buttonOutput_Click);
 			// 
-			// OrganizeForm
+			// OrganizeHuaceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,7 +125,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "OrganizeForm";
+			this.Name = "OrganizeHuaceForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "整理华测激光雷达数据并合并POS文件";
 			this.ResumeLayout(false);

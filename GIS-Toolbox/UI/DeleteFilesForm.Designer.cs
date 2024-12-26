@@ -74,9 +74,9 @@
 			// 
 			// buttonOpenDir
 			// 
-			this.buttonOpenDir.Location = new System.Drawing.Point(688, 39);
+			this.buttonOpenDir.Location = new System.Drawing.Point(691, 37);
 			this.buttonOpenDir.Name = "buttonOpenDir";
-			this.buttonOpenDir.Size = new System.Drawing.Size(60, 28);
+			this.buttonOpenDir.Size = new System.Drawing.Size(61, 33);
 			this.buttonOpenDir.TabIndex = 5;
 			this.buttonOpenDir.Text = "...";
 			this.buttonOpenDir.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(937, 191);
+			this.ClientSize = new System.Drawing.Size(937, 180);
 			this.Controls.Add(this.comboBoxFileExtension);
 			this.Controls.Add(this.buttonOpenDir);
 			this.Controls.Add(this.buttonDeleteAll);

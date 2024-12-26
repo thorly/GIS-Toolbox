@@ -99,74 +99,86 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox.cs">
+    <Compile Include="UI\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox.Designer.cs">
+    <Compile Include="UI\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopyProgressForm.cs">
+    <Compile Include="UI\AddDxDyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopyProgressForm.Designer.cs">
+    <Compile Include="UI\AddDxDyForm.Designer.cs">
+      <DependentUpon>AddDxDyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CopyProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CopyProgressForm.Designer.cs">
       <DependentUpon>CopyProgressForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteFilesForm.cs">
+    <Compile Include="UI\DeleteFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteFilesForm.Designer.cs">
+    <Compile Include="UI\DeleteFilesForm.Designer.cs">
       <DependentUpon>DeleteFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DisplayForm.cs">
+    <Compile Include="UI\DisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DisplayForm.Designer.cs">
+    <Compile Include="UI\DisplayForm.Designer.cs">
       <DependentUpon>DisplayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExtractColumnForm.cs">
+    <Compile Include="UI\ExtractColumnForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExtractColumnForm.Designer.cs">
+    <Compile Include="UI\ExtractColumnForm.Designer.cs">
       <DependentUpon>ExtractColumnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FolderSelectDialog\FolderSelectDialogMulti.cs" />
     <Compile Include="FolderSelectDialog\FolderSelectDialogSingle.cs" />
-    <Compile Include="ImportKmlProForm.cs">
+    <Compile Include="UI\ImportKmlProForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportKmlProForm.Designer.cs">
+    <Compile Include="UI\ImportKmlProForm.Designer.cs">
       <DependentUpon>ImportKmlProForm.cs</DependentUpon>
     </Compile>
     <Compile Include="KmlJson.cs" />
-    <Compile Include="LL2kmlForm.cs">
+    <Compile Include="UI\LL2kmlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LL2kmlForm.Designer.cs">
+    <Compile Include="UI\LL2kmlForm.Designer.cs">
       <DependentUpon>LL2kmlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapProviderBase.cs" />
-    <Compile Include="MergePOSForm.cs">
+    <Compile Include="UI\MakeFeimaPOSForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MergePOSForm.Designer.cs">
+    <Compile Include="UI\MakeFeimaPOSForm.Designer.cs">
+      <DependentUpon>MakeFeimaPOSForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TianDiTuMap\MapProviderBase.cs" />
+    <Compile Include="UI\MergePOSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MergePOSForm.Designer.cs">
       <DependentUpon>MergePOSForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrganizeForm.cs">
+    <Compile Include="UI\OrganizeHuaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrganizeForm.Designer.cs">
-      <DependentUpon>OrganizeForm.cs</DependentUpon>
+    <Compile Include="UI\OrganizeHuaceForm.Designer.cs">
+      <DependentUpon>OrganizeHuaceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HuacePOSForm.cs">
+    <Compile Include="UI\HuacePOSForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HuacePOSForm.Designer.cs">
+    <Compile Include="UI\HuacePOSForm.Designer.cs">
       <DependentUpon>HuacePOSForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -176,37 +188,61 @@
     <Compile Include="TianDiTuMap\TianDiTuImageProvider.cs" />
     <Compile Include="TianDiTuMap\TianDiTuVectorProvider.cs" />
     <Compile Include="Tools.cs" />
-    <EmbeddedResource Include="AboutBox.resx">
+    <Compile Include="UI\OrganizePix4DmapperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrganizePix4DmapperForm.Designer.cs">
+      <DependentUpon>OrganizePix4DmapperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SplitFeimaCameraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SplitFeimaCameraForm.Designer.cs">
+      <DependentUpon>SplitFeimaCameraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UniqueFeimaCameraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UniqueFeimaCameraForm.Designer.cs">
+      <DependentUpon>UniqueFeimaCameraForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyProgressForm.resx">
+    <EmbeddedResource Include="UI\AddDxDyForm.resx">
+      <DependentUpon>AddDxDyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CopyProgressForm.resx">
       <DependentUpon>CopyProgressForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteFilesForm.resx">
+    <EmbeddedResource Include="UI\DeleteFilesForm.resx">
       <DependentUpon>DeleteFilesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DisplayForm.resx">
+    <EmbeddedResource Include="UI\DisplayForm.resx">
       <DependentUpon>DisplayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExtractColumnForm.resx">
+    <EmbeddedResource Include="UI\ExtractColumnForm.resx">
       <DependentUpon>ExtractColumnForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportKmlProForm.resx">
+    <EmbeddedResource Include="UI\ImportKmlProForm.resx">
       <DependentUpon>ImportKmlProForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LL2kmlForm.resx">
+    <EmbeddedResource Include="UI\LL2kmlForm.resx">
       <DependentUpon>LL2kmlForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MergePOSForm.resx">
+    <EmbeddedResource Include="UI\MakeFeimaPOSForm.resx">
+      <DependentUpon>MakeFeimaPOSForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MergePOSForm.resx">
       <DependentUpon>MergePOSForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrganizeForm.resx">
-      <DependentUpon>OrganizeForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\OrganizeHuaceForm.resx">
+      <DependentUpon>OrganizeHuaceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HuacePOSForm.resx">
+    <EmbeddedResource Include="UI\HuacePOSForm.resx">
       <DependentUpon>HuacePOSForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -219,6 +255,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\OrganizePix4DmapperForm.resx">
+      <DependentUpon>OrganizePix4DmapperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SplitFeimaCameraForm.resx">
+      <DependentUpon>SplitFeimaCameraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UniqueFeimaCameraForm.resx">
+      <DependentUpon>UniqueFeimaCameraForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="HelpDoc\help.docx" />
     <None Include="HelpDoc\help.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -318,6 +363,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\星球.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\马.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\添加列.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\分离.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\一对一.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

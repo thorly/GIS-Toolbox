@@ -13,7 +13,7 @@ namespace GIS_Toolbox
 			InitializeComponent();
 			this.textBoxDirectory.Enabled = false;
 			
-			this.comboBoxFileExtension.Items.AddRange(new string[] { ".codata", ".las", ".txt"});
+			this.comboBoxFileExtension.Items.AddRange(new string[] { ".codata", ".las", ".txt", ".fmi"});
 			this.comboBoxFileExtension.SelectedIndex = 0;
 		}
 

@@ -18,8 +18,6 @@ namespace GIS_Toolbox
 
 			//默认选择114
 			this.comboBoxCenterLng.SelectedIndex = 13;
-			
-			this.textBoxImageDir.Enabled = false;
 		}
 
 		private void buttonOpen_Click(object sender, EventArgs e)

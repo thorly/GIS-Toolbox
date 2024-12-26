@@ -32,17 +32,17 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.切换地图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.BingImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.基于POS显示图片ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.画图工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.小工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.treeView = new System.Windows.Forms.TreeView();
 			this.kmlContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
 			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+			this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
 			this.SaveKmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveKmlCheckedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +51,7 @@
 			this.ZoomToLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TianDiTuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TianDiTuImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.BingImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HuaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.DJIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MeasureDistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,10 +60,15 @@
 			this.ImportKmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ImportKmlProToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.LL2KmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.整理Lidar数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.MakeFeimaPOSPOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MergePOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.AddDxDyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.整理Lidar数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.DeleteFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExtractColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.OrganizePix4DmapperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.SplitFeimaCameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.UniqueFeimaCameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
@@ -82,6 +88,7 @@
             this.基于POS显示图片ToolStripMenuItem1,
             this.画图工具ToolStripMenuItem,
             this.kMLToolStripMenuItem,
+            this.pOSToolStripMenuItem,
             this.小工具ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -97,16 +104,8 @@
             this.TianDiTuImageToolStripMenuItem,
             this.BingImageToolStripMenuItem});
 			this.切换地图ToolStripMenuItem.Name = "切换地图ToolStripMenuItem";
-			this.切换地图ToolStripMenuItem.Size = new System.Drawing.Size(98, 30);
+			this.切换地图ToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
 			this.切换地图ToolStripMenuItem.Text = "切换地图";
-			// 
-			// BingImageToolStripMenuItem
-			// 
-			this.BingImageToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.必应;
-			this.BingImageToolStripMenuItem.Name = "BingImageToolStripMenuItem";
-			this.BingImageToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-			this.BingImageToolStripMenuItem.Text = "Bing卫星影像";
-			this.BingImageToolStripMenuItem.Click += new System.EventHandler(this.BingImageToolStripMenuItem_Click);
 			// 
 			// 基于POS显示图片ToolStripMenuItem1
 			// 
@@ -114,7 +113,7 @@
             this.HuaceToolStripMenuItem,
             this.DJIToolStripMenuItem});
 			this.基于POS显示图片ToolStripMenuItem1.Name = "基于POS显示图片ToolStripMenuItem1";
-			this.基于POS显示图片ToolStripMenuItem1.Size = new System.Drawing.Size(170, 30);
+			this.基于POS显示图片ToolStripMenuItem1.Size = new System.Drawing.Size(170, 28);
 			this.基于POS显示图片ToolStripMenuItem1.Text = "基于POS显示图片";
 			// 
 			// 画图工具ToolStripMenuItem
@@ -124,7 +123,7 @@
             this.DrawPolylineToolStripMenuItem,
             this.DrawPolygonToolStripMenuItem});
 			this.画图工具ToolStripMenuItem.Name = "画图工具ToolStripMenuItem";
-			this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(98, 30);
+			this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
 			this.画图工具ToolStripMenuItem.Text = "画图工具";
 			// 
 			// kMLToolStripMenuItem
@@ -134,18 +133,30 @@
             this.ImportKmlProToolStripMenuItem,
             this.LL2KmlToolStripMenuItem});
 			this.kMLToolStripMenuItem.Name = "kMLToolStripMenuItem";
-			this.kMLToolStripMenuItem.Size = new System.Drawing.Size(58, 30);
+			this.kMLToolStripMenuItem.Size = new System.Drawing.Size(58, 28);
 			this.kMLToolStripMenuItem.Text = "kml";
+			// 
+			// pOSToolStripMenuItem
+			// 
+			this.pOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MakeFeimaPOSPOSToolStripMenuItem,
+            this.MergePOSToolStripMenuItem,
+            this.AddDxDyToolStripMenuItem});
+			this.pOSToolStripMenuItem.Name = "pOSToolStripMenuItem";
+			this.pOSToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+			this.pOSToolStripMenuItem.Text = "POS";
 			// 
 			// 小工具ToolStripMenuItem
 			// 
 			this.小工具ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.整理Lidar数据ToolStripMenuItem,
-            this.MergePOSToolStripMenuItem,
             this.DeleteFilesToolStripMenuItem,
-            this.ExtractColumnToolStripMenuItem});
+            this.ExtractColumnToolStripMenuItem,
+            this.OrganizePix4DmapperToolStripMenuItem,
+            this.SplitFeimaCameraToolStripMenuItem,
+            this.UniqueFeimaCameraToolStripMenuItem});
 			this.小工具ToolStripMenuItem.Name = "小工具ToolStripMenuItem";
-			this.小工具ToolStripMenuItem.Size = new System.Drawing.Size(62, 30);
+			this.小工具ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
 			this.小工具ToolStripMenuItem.Text = "其他";
 			// 
 			// 帮助ToolStripMenuItem
@@ -154,7 +165,7 @@
             this.AboutToolStripMenuItem,
             this.HelpToolStripMenuItem});
 			this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-			this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(62, 30);
+			this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
 			this.帮助ToolStripMenuItem.Text = "帮助";
 			// 
 			// splitContainer
@@ -275,7 +286,7 @@
 			// 
 			this.TianDiTuToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.地图;
 			this.TianDiTuToolStripMenuItem.Name = "TianDiTuToolStripMenuItem";
-			this.TianDiTuToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.TianDiTuToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
 			this.TianDiTuToolStripMenuItem.Text = "天地图";
 			this.TianDiTuToolStripMenuItem.Click += new System.EventHandler(this.TianDiTuToolStripMenuItem_Click);
 			// 
@@ -283,24 +294,32 @@
 			// 
 			this.TianDiTuImageToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.星球;
 			this.TianDiTuImageToolStripMenuItem.Name = "TianDiTuImageToolStripMenuItem";
-			this.TianDiTuImageToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.TianDiTuImageToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
 			this.TianDiTuImageToolStripMenuItem.Text = "天地图卫星影像";
 			this.TianDiTuImageToolStripMenuItem.Click += new System.EventHandler(this.TianDiTuImageToolStripMenuItem_Click);
+			// 
+			// BingImageToolStripMenuItem
+			// 
+			this.BingImageToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.必应;
+			this.BingImageToolStripMenuItem.Name = "BingImageToolStripMenuItem";
+			this.BingImageToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+			this.BingImageToolStripMenuItem.Text = "Bing卫星影像";
+			this.BingImageToolStripMenuItem.Click += new System.EventHandler(this.BingImageToolStripMenuItem_Click);
 			// 
 			// HuaceToolStripMenuItem
 			// 
 			this.HuaceToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.雷达;
 			this.HuaceToolStripMenuItem.Name = "HuaceToolStripMenuItem";
-			this.HuaceToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
-			this.HuaceToolStripMenuItem.Text = "华测激光雷达";
+			this.HuaceToolStripMenuItem.Size = new System.Drawing.Size(284, 34);
+			this.HuaceToolStripMenuItem.Text = "飞马/华测激光雷达";
 			this.HuaceToolStripMenuItem.Click += new System.EventHandler(this.HuaceToolStripMenuItem_Click);
 			// 
 			// DJIToolStripMenuItem
 			// 
 			this.DJIToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.摄像机;
 			this.DJIToolStripMenuItem.Name = "DJIToolStripMenuItem";
-			this.DJIToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
-			this.DJIToolStripMenuItem.Text = "大疆无人机";
+			this.DJIToolStripMenuItem.Size = new System.Drawing.Size(284, 34);
+			this.DJIToolStripMenuItem.Text = "大疆无人机(自带POS)";
 			this.DJIToolStripMenuItem.Click += new System.EventHandler(this.DJIToolStripMenuItem_Click);
 			// 
 			// MeasureDistanceToolStripMenuItem
@@ -351,27 +370,43 @@
 			this.LL2KmlToolStripMenuItem.Text = "经纬度转kml";
 			this.LL2KmlToolStripMenuItem.Click += new System.EventHandler(this.LL2KmlToolStripMenuItem_Click_1);
 			// 
-			// 整理Lidar数据ToolStripMenuItem
+			// MakeFeimaPOSPOSToolStripMenuItem
 			// 
-			this.整理Lidar数据ToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.整理;
-			this.整理Lidar数据ToolStripMenuItem.Name = "整理Lidar数据ToolStripMenuItem";
-			this.整理Lidar数据ToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
-			this.整理Lidar数据ToolStripMenuItem.Text = "整理Lidar数据-华测";
-			this.整理Lidar数据ToolStripMenuItem.Click += new System.EventHandler(this.整理Lidar数据ToolStripMenuItem_Click);
+			this.MakeFeimaPOSPOSToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.马;
+			this.MakeFeimaPOSPOSToolStripMenuItem.Name = "MakeFeimaPOSPOSToolStripMenuItem";
+			this.MakeFeimaPOSPOSToolStripMenuItem.Size = new System.Drawing.Size(344, 34);
+			this.MakeFeimaPOSPOSToolStripMenuItem.Text = "制作飞马无人机POS";
+			this.MakeFeimaPOSPOSToolStripMenuItem.Click += new System.EventHandler(this.MakeFeimaPOSPOSToolStripMenuItem_Click);
 			// 
 			// MergePOSToolStripMenuItem
 			// 
 			this.MergePOSToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.合并;
 			this.MergePOSToolStripMenuItem.Name = "MergePOSToolStripMenuItem";
-			this.MergePOSToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
+			this.MergePOSToolStripMenuItem.Size = new System.Drawing.Size(344, 34);
 			this.MergePOSToolStripMenuItem.Text = "合并POS文件";
 			this.MergePOSToolStripMenuItem.Click += new System.EventHandler(this.MergePOSToolStripMenuItem_Click);
+			// 
+			// AddDxDyToolStripMenuItem
+			// 
+			this.AddDxDyToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.添加列;
+			this.AddDxDyToolStripMenuItem.Name = "AddDxDyToolStripMenuItem";
+			this.AddDxDyToolStripMenuItem.Size = new System.Drawing.Size(344, 34);
+			this.AddDxDyToolStripMenuItem.Text = "POS文件添加水平和垂直精度";
+			this.AddDxDyToolStripMenuItem.Click += new System.EventHandler(this.AddDxDyToolStripMenuItem_Click);
+			// 
+			// 整理Lidar数据ToolStripMenuItem
+			// 
+			this.整理Lidar数据ToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.整理;
+			this.整理Lidar数据ToolStripMenuItem.Name = "整理Lidar数据ToolStripMenuItem";
+			this.整理Lidar数据ToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.整理Lidar数据ToolStripMenuItem.Text = "整理华测Lidar数据";
+			this.整理Lidar数据ToolStripMenuItem.Click += new System.EventHandler(this.整理Lidar数据ToolStripMenuItem_Click);
 			// 
 			// DeleteFilesToolStripMenuItem
 			// 
 			this.DeleteFilesToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.删除;
 			this.DeleteFilesToolStripMenuItem.Name = "DeleteFilesToolStripMenuItem";
-			this.DeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
+			this.DeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
 			this.DeleteFilesToolStripMenuItem.Text = "删除指定扩展名文件";
 			this.DeleteFilesToolStripMenuItem.Click += new System.EventHandler(this.DeleteFilesToolStripMenuItem_Click);
 			// 
@@ -379,9 +414,33 @@
 			// 
 			this.ExtractColumnToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.列;
 			this.ExtractColumnToolStripMenuItem.Name = "ExtractColumnToolStripMenuItem";
-			this.ExtractColumnToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
+			this.ExtractColumnToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
 			this.ExtractColumnToolStripMenuItem.Text = "提取某几列数据";
 			this.ExtractColumnToolStripMenuItem.Click += new System.EventHandler(this.ExtractColumnToolStripMenuItem_Click);
+			// 
+			// OrganizePix4DmapperToolStripMenuItem
+			// 
+			this.OrganizePix4DmapperToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.整理;
+			this.OrganizePix4DmapperToolStripMenuItem.Name = "OrganizePix4DmapperToolStripMenuItem";
+			this.OrganizePix4DmapperToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.OrganizePix4DmapperToolStripMenuItem.Text = "整理Pix4Dmapper工程文件";
+			this.OrganizePix4DmapperToolStripMenuItem.Click += new System.EventHandler(this.OrganizePix4DmapperToolStripMenuItem_Click);
+			// 
+			// SplitFeimaCameraToolStripMenuItem
+			// 
+			this.SplitFeimaCameraToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.分离;
+			this.SplitFeimaCameraToolStripMenuItem.Name = "SplitFeimaCameraToolStripMenuItem";
+			this.SplitFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.SplitFeimaCameraToolStripMenuItem.Text = "飞马无人机照片分架次处理";
+			this.SplitFeimaCameraToolStripMenuItem.Click += new System.EventHandler(this.SplitFeimaCameraToolStripMenuItem_Click);
+			// 
+			// UniqueFeimaCameraToolStripMenuItem
+			// 
+			this.UniqueFeimaCameraToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.一对一;
+			this.UniqueFeimaCameraToolStripMenuItem.Name = "UniqueFeimaCameraToolStripMenuItem";
+			this.UniqueFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.UniqueFeimaCameraToolStripMenuItem.Text = "飞马无人机照片唯一化处理";
+			this.UniqueFeimaCameraToolStripMenuItem.Click += new System.EventHandler(this.UniqueFeimaCameraToolStripMenuItem_Click);
 			// 
 			// AboutToolStripMenuItem
 			// 
@@ -428,8 +487,6 @@
 		private GMap.NET.WindowsForms.GMapControl gMapControl;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem 小工具ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 整理Lidar数据ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem MergePOSToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem DeleteFilesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ExtractColumnToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 基于POS显示图片ToolStripMenuItem1;
@@ -460,6 +517,14 @@
 		private System.ComponentModel.BackgroundWorker backgroundWorker;
 		private System.Windows.Forms.ToolStripMenuItem ToDxfToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ZoomToLayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem pOSToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem MakeFeimaPOSPOSToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem MergePOSToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem AddDxDyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 整理Lidar数据ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem OrganizePix4DmapperToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem SplitFeimaCameraToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem UniqueFeimaCameraToolStripMenuItem;
 	}
 }
 

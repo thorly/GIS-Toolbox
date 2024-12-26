@@ -55,9 +55,9 @@
 			// 
 			// buttonAddFile
 			// 
-			this.buttonAddFile.Location = new System.Drawing.Point(1008, 113);
+			this.buttonAddFile.Location = new System.Drawing.Point(999, 27);
 			this.buttonAddFile.Name = "buttonAddFile";
-			this.buttonAddFile.Size = new System.Drawing.Size(72, 33);
+			this.buttonAddFile.Size = new System.Drawing.Size(75, 34);
 			this.buttonAddFile.TabIndex = 1;
 			this.buttonAddFile.Text = "添加";
 			this.buttonAddFile.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
 			// 
 			// buttonSetOutput
 			// 
-			this.buttonSetOutput.Location = new System.Drawing.Point(718, 49);
+			this.buttonSetOutput.Location = new System.Drawing.Point(718, 47);
 			this.buttonSetOutput.Name = "buttonSetOutput";
-			this.buttonSetOutput.Size = new System.Drawing.Size(68, 31);
+			this.buttonSetOutput.Size = new System.Drawing.Size(61, 33);
 			this.buttonSetOutput.TabIndex = 1;
 			this.buttonSetOutput.Text = "...";
 			this.buttonSetOutput.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
 			// checkBoxFirstLine
 			// 
 			this.checkBoxFirstLine.AutoSize = true;
-			this.checkBoxFirstLine.Location = new System.Drawing.Point(827, 52);
+			this.checkBoxFirstLine.Location = new System.Drawing.Point(827, 55);
 			this.checkBoxFirstLine.Name = "checkBoxFirstLine";
 			this.checkBoxFirstLine.Size = new System.Drawing.Size(142, 22);
 			this.checkBoxFirstLine.TabIndex = 4;
@@ -109,9 +109,9 @@
 			// 
 			// buttonMerge
 			// 
-			this.buttonMerge.Location = new System.Drawing.Point(1007, 46);
+			this.buttonMerge.Location = new System.Drawing.Point(998, 47);
 			this.buttonMerge.Name = "buttonMerge";
-			this.buttonMerge.Size = new System.Drawing.Size(72, 33);
+			this.buttonMerge.Size = new System.Drawing.Size(75, 34);
 			this.buttonMerge.TabIndex = 5;
 			this.buttonMerge.Text = "合并";
 			this.buttonMerge.UseVisualStyleBackColor = true;
@@ -119,9 +119,9 @@
 			// 
 			// buttonDeleteAll
 			// 
-			this.buttonDeleteAll.Location = new System.Drawing.Point(1008, 181);
+			this.buttonDeleteAll.Location = new System.Drawing.Point(999, 91);
 			this.buttonDeleteAll.Name = "buttonDeleteAll";
-			this.buttonDeleteAll.Size = new System.Drawing.Size(72, 33);
+			this.buttonDeleteAll.Size = new System.Drawing.Size(75, 34);
 			this.buttonDeleteAll.TabIndex = 6;
 			this.buttonDeleteAll.Text = "清除";
 			this.buttonDeleteAll.UseVisualStyleBackColor = true;

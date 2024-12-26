@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace GIS_Toolbox
 {
-	public partial class OrganizeForm : Form
+	public partial class OrganizeHuaceForm : Form
 	{
-		public OrganizeForm()
+		public OrganizeHuaceForm()
 		{
 			InitializeComponent();
 		}

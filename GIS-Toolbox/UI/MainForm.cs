@@ -19,6 +19,7 @@ using System.ComponentModel;
 using IxMilia.Dxf;
 using IxMilia.Dxf.Entities;
 using System.Text.Json;
+using GIS_Toolbox.UI;
 
 
 namespace GIS_Toolbox
@@ -218,6 +219,9 @@ namespace GIS_Toolbox
 					process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 					process.Start();
 					process.Close();
+
+					//点击marker后变大
+					item.Size = new Size(12*2, 20*2);
 				}
 				else
 				{
@@ -243,7 +247,7 @@ namespace GIS_Toolbox
 
 		private void 整理Lidar数据ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			OrganizeForm organizeForm = new OrganizeForm();
+			OrganizeHuaceForm organizeForm = new OrganizeHuaceForm();
 			organizeForm.ShowDialog(this);
 		}
 
@@ -465,12 +469,6 @@ namespace GIS_Toolbox
 		}
 
 		#endregion
-
-		private void MergePOSToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			MergePOSForm mergePOSForm = new MergePOSForm();
-			mergePOSForm.ShowDialog(this);
-		}
 
 		private void DeleteFilesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -1347,6 +1345,42 @@ namespace GIS_Toolbox
 					ZoomToLayer(overlay);
 				}
 			}
+		}
+
+		private void MakeFeimaPOSPOSToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MakeFeimaPOSForm form = new MakeFeimaPOSForm();
+			form.ShowDialog(this);
+		}
+
+		private void MergePOSToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MergePOSForm mergePOSForm = new MergePOSForm();
+			mergePOSForm.ShowDialog(this);
+		}
+
+		private void AddDxDyToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			AddDxDyForm form = new AddDxDyForm();
+			form.ShowDialog(this);
+		}
+
+		private void OrganizePix4DmapperToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			OrganizePix4DmapperForm form = new OrganizePix4DmapperForm();
+			form.ShowDialog(this);
+		}
+
+		private void UniqueFeimaCameraToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			UniqueFeimaCameraForm form = new UniqueFeimaCameraForm();
+			form.ShowDialog(this);
+		}
+
+		private void SplitFeimaCameraToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SplitFeimaCameraForm form = new SplitFeimaCameraForm();
+			form.ShowDialog(this);
 		}
 	}
 }

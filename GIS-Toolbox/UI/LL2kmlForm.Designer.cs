@@ -67,7 +67,7 @@
 			// 
 			this.buttonImportFile.Location = new System.Drawing.Point(28, 33);
 			this.buttonImportFile.Name = "buttonImportFile";
-			this.buttonImportFile.Size = new System.Drawing.Size(141, 38);
+			this.buttonImportFile.Size = new System.Drawing.Size(141, 34);
 			this.buttonImportFile.TabIndex = 1;
 			this.buttonImportFile.Text = "导入文本文件";
 			this.buttonImportFile.UseVisualStyleBackColor = true;
@@ -183,7 +183,7 @@
 			// 
 			this.buttonExportKml.Location = new System.Drawing.Point(687, 33);
 			this.buttonExportKml.Name = "buttonExportKml";
-			this.buttonExportKml.Size = new System.Drawing.Size(141, 38);
+			this.buttonExportKml.Size = new System.Drawing.Size(141, 34);
 			this.buttonExportKml.TabIndex = 4;
 			this.buttonExportKml.Text = "导出kml文件";
 			this.buttonExportKml.UseVisualStyleBackColor = true;

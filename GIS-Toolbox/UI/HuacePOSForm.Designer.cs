@@ -66,7 +66,7 @@
 			this.textBoxImageDir.Location = new System.Drawing.Point(164, 42);
 			this.textBoxImageDir.Multiline = true;
 			this.textBoxImageDir.Name = "textBoxImageDir";
-			this.textBoxImageDir.Size = new System.Drawing.Size(650, 153);
+			this.textBoxImageDir.Size = new System.Drawing.Size(650, 177);
 			this.textBoxImageDir.TabIndex = 2;
 			// 
 			// buttonImport
@@ -144,7 +144,7 @@
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(1006, 456);
 			this.Name = "HuacePOSForm";
-			this.Text = "导入华测设备图片";
+			this.Text = "导入飞马/华测设备图片";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);

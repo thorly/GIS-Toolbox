@@ -71,11 +71,31 @@ namespace GIS_Toolbox.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap KML {
             get {
                 object obj = ResourceManager.GetObject("KML", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 一对一 {
+            get {
+                object obj = ResourceManager.GetObject("一对一", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +116,16 @@ namespace GIS_Toolbox.Properties {
         internal static System.Drawing.Bitmap 关于 {
             get {
                 object obj = ResourceManager.GetObject("关于", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 分离 {
+            get {
+                object obj = ResourceManager.GetObject("分离", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,6 +243,16 @@ namespace GIS_Toolbox.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 添加列 {
+            get {
+                object obj = ResourceManager.GetObject("添加列", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 线段 {
             get {
                 object obj = ResourceManager.GetObject("线段", resourceCulture);
@@ -256,6 +296,16 @@ namespace GIS_Toolbox.Properties {
         internal static System.Drawing.Bitmap 雷达 {
             get {
                 object obj = ResourceManager.GetObject("雷达", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 马 {
+            get {
+                object obj = ResourceManager.GetObject("马", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

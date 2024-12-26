@@ -34,7 +34,6 @@ namespace GIS_Toolbox
 			InitializeComponent();
 
 			this.checkBoxDisplay.Checked = true;
-			this.textBoxKml.Enabled = false;
 			
 			//marker样式
 			this.comboBoxMarkerStyle.Items.Add("blue_small");

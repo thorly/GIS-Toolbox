@@ -461,5 +461,55 @@ namespace GIS_Toolbox
 
 			return k;
 		}
+
+		public static void DeleteDirectory(string directory)
+		{
+			if (Directory.Exists(directory))
+			{
+				try
+				{
+					Directory.Delete(directory, true);
+				}
+				catch (IOException ex)
+				{
+					Console.WriteLine("无法删除文件夹：" + ex.Message);
+				}
+				catch (UnauthorizedAccessException ex)
+				{
+					Console.WriteLine("没有权限删除文件夹：" + ex.Message);
+				}
+			}
+		}
+
+		public static void DeleteFile(string file)
+		{
+			if (File.Exists(file))
+			{
+				try
+				{
+					File.Delete(file);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("无法删除文件：" + ex.Message);
+				}
+			}
+		}
+
+		public static void MoveFile(string source, string directory)
+		{
+            string destination = Path.Combine(directory, Path.GetFileName(source));
+			try
+			{
+				if (File.Exists(source) && !File.Exists(destination))
+				{
+					File.Move(source, destination);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("移动文件失败：" + ex.Message);
+			}
+		}
 	}
 }

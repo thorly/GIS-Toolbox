@@ -118,53 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="删除" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\删除.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="合并" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\合并.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="列" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\列.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="整理" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\整理.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="帮助" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\帮助.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="关于" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\关于.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="多边形" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\多边形.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="距离" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\距离.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="线段" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\线段.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="雷达" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\雷达.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="摄像机" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\摄像机.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="转换" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\转换.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="KML" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\KML.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="保存" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\保存.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="图片" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\图片.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="缩放" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\缩放.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="星球" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\星球.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dxf文件" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dxf文件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,10 +127,70 @@
   <data name="地图" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\地图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="关于" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\关于.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="图片" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\图片.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="马" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\马.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="合并" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\合并.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="删除" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\删除.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="多边形" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\多边形.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="列" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\列.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="添加列" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\添加列.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="帮助" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\帮助.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\earth.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="摄像机" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\摄像机.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="整理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\整理.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="线段" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\线段.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="雷达" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\雷达.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KML" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KML.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="保存" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\保存.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="必应" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\必应.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="星球" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\星球.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="转换" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\转换.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="分离" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\分离.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="距离" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\距离.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="缩放" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\缩放.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="一对一" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\一对一.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

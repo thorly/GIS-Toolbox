@@ -66,7 +66,7 @@
 			// 
 			this.buttonAddKml.Location = new System.Drawing.Point(779, 41);
 			this.buttonAddKml.Name = "buttonAddKml";
-			this.buttonAddKml.Size = new System.Drawing.Size(75, 28);
+			this.buttonAddKml.Size = new System.Drawing.Size(75, 34);
 			this.buttonAddKml.TabIndex = 2;
 			this.buttonAddKml.Text = "添加";
 			this.buttonAddKml.UseVisualStyleBackColor = true;
@@ -101,9 +101,9 @@
 			// 
 			// buttonImport
 			// 
-			this.buttonImport.Location = new System.Drawing.Point(779, 54);
+			this.buttonImport.Location = new System.Drawing.Point(779, 53);
 			this.buttonImport.Name = "buttonImport";
-			this.buttonImport.Size = new System.Drawing.Size(75, 28);
+			this.buttonImport.Size = new System.Drawing.Size(75, 34);
 			this.buttonImport.TabIndex = 6;
 			this.buttonImport.Text = "导入";
 			this.buttonImport.UseVisualStyleBackColor = true;
@@ -124,9 +124,9 @@
 			// 
 			// buttonClear
 			// 
-			this.buttonClear.Location = new System.Drawing.Point(779, 94);
+			this.buttonClear.Location = new System.Drawing.Point(779, 93);
 			this.buttonClear.Name = "buttonClear";
-			this.buttonClear.Size = new System.Drawing.Size(75, 28);
+			this.buttonClear.Size = new System.Drawing.Size(75, 34);
 			this.buttonClear.TabIndex = 3;
 			this.buttonClear.Text = "清除";
 			this.buttonClear.UseVisualStyleBackColor = true;
@@ -171,9 +171,7 @@
 			this.Controls.Add(this.groupBox1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(929, 450);
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(929, 450);
 			this.Name = "ImportKmlProForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "导入kml";
