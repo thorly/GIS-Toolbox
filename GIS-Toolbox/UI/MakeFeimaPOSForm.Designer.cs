@@ -82,7 +82,7 @@
 			// 
 			// buttonImage
 			// 
-			this.buttonImage.Location = new System.Drawing.Point(947, 575);
+			this.buttonImage.Location = new System.Drawing.Point(947, 576);
 			this.buttonImage.Name = "buttonImage";
 			this.buttonImage.Size = new System.Drawing.Size(61, 33);
 			this.buttonImage.TabIndex = 1;
@@ -102,9 +102,9 @@
 			// 
 			// buttonMake
 			// 
-			this.buttonMake.Location = new System.Drawing.Point(1055, 56);
+			this.buttonMake.Location = new System.Drawing.Point(1062, 57);
 			this.buttonMake.Name = "buttonMake";
-			this.buttonMake.Size = new System.Drawing.Size(106, 34);
+			this.buttonMake.Size = new System.Drawing.Size(92, 34);
 			this.buttonMake.TabIndex = 3;
 			this.buttonMake.Text = "导出POS";
 			this.buttonMake.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(1200, 699);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "导入设置";
+			this.groupBox1.Text = "导入";
 			// 
 			// buttonPreview
 			// 
@@ -158,11 +158,11 @@
 			this.groupBox2.Size = new System.Drawing.Size(1200, 138);
 			this.groupBox2.TabIndex = 6;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "导出设置";
+			this.groupBox2.Text = "导出";
 			// 
 			// buttonOutPOS
 			// 
-			this.buttonOutPOS.Location = new System.Drawing.Point(947, 57);
+			this.buttonOutPOS.Location = new System.Drawing.Point(947, 58);
 			this.buttonOutPOS.Name = "buttonOutPOS";
 			this.buttonOutPOS.Size = new System.Drawing.Size(61, 33);
 			this.buttonOutPOS.TabIndex = 4;

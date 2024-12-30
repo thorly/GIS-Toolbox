@@ -120,7 +120,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(883, 217);
 			this.groupBox1.TabIndex = 7;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "添加kml文件";
+			this.groupBox1.Text = "输入";
 			// 
 			// buttonClear
 			// 
@@ -166,6 +166,8 @@
 			// 
 			// ImportKmlProForm
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(907, 394);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);

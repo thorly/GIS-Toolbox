@@ -11,7 +11,6 @@ namespace GIS_Toolbox
 		public DeleteFilesForm()
 		{
 			InitializeComponent();
-			this.textBoxDirectory.Enabled = false;
 			
 			this.comboBoxFileExtension.Items.AddRange(new string[] { ".codata", ".las", ".txt", ".fmi"});
 			this.comboBoxFileExtension.SelectedIndex = 0;

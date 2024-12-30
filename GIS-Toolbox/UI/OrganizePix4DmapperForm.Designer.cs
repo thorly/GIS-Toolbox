@@ -99,7 +99,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(981, 298);
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "选择文件夹";
+			this.groupBox1.Text = "输入";
 			// 
 			// groupBox2
 			// 

@@ -115,9 +115,9 @@
 			this.checkBoxSkipFirstLine.AutoSize = true;
 			this.checkBoxSkipFirstLine.Location = new System.Drawing.Point(644, 108);
 			this.checkBoxSkipFirstLine.Name = "checkBoxSkipFirstLine";
-			this.checkBoxSkipFirstLine.Size = new System.Drawing.Size(142, 22);
+			this.checkBoxSkipFirstLine.Size = new System.Drawing.Size(106, 22);
 			this.checkBoxSkipFirstLine.TabIndex = 7;
-			this.checkBoxSkipFirstLine.Text = "是否跳过首行";
+			this.checkBoxSkipFirstLine.Text = "跳过首行";
 			this.checkBoxSkipFirstLine.UseVisualStyleBackColor = true;
 			// 
 			// AddDxDyForm

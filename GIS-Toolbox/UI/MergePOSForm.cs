@@ -12,8 +12,6 @@ namespace GIS_Toolbox
 			InitializeComponent();
 
 			this.checkBoxFirstLine.Checked = true;
-			this.textBoxInputFiles.Enabled = false;
-			this.textBoxOutputFile.Enabled = false;
 
 			this.buttonAddFile.TabIndex = 0;
 			this.buttonSetOutput.TabIndex = 1;

@@ -116,7 +116,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(938, 100);
 			this.groupBox1.TabIndex = 7;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "输出设置";
+			this.groupBox1.Text = "设置";
 			// 
 			// groupBox2
 			// 
@@ -129,7 +129,7 @@
 			this.groupBox2.Size = new System.Drawing.Size(937, 313);
 			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "输入设置";
+			this.groupBox2.Text = "输入";
 			// 
 			// UniqueFeimaCameraForm
 			// 

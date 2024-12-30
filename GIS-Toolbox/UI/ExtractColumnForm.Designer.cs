@@ -85,7 +85,7 @@
 			this.groupBox.Size = new System.Drawing.Size(779, 86);
 			this.groupBox.TabIndex = 2;
 			this.groupBox.TabStop = false;
-			this.groupBox.Text = "导入设置";
+			this.groupBox.Text = "导入";
 			// 
 			// label2
 			// 
@@ -184,7 +184,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(720, 86);
 			this.groupBox1.TabIndex = 6;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "导出设置";
+			this.groupBox1.Text = "导出";
 			// 
 			// label3
 			// 

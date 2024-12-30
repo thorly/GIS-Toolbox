@@ -490,8 +490,10 @@ namespace GIS_Toolbox
 
 		private void HuaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			HuacePOSForm posForm = new HuacePOSForm();
-			posForm.StartPosition = FormStartPosition.CenterParent;
+			HuacePOSForm posForm = new HuacePOSForm
+			{
+				StartPosition = FormStartPosition.CenterParent
+			};
 
 			DialogResult dialogResult = posForm.ShowDialog(this);
 
@@ -509,11 +511,15 @@ namespace GIS_Toolbox
 
 					if (File.Exists(posFile))
 					{
-						//记录当前时间，使ID唯一化
-						string overlayId = Path.GetFileName(imageDir) + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+						int index = imageDirs.ToList().IndexOf(imageDir) + 1;
+
+						string dirName = Path.GetFileName(imageDir);
+
+						//记录当前时间，使ID唯一化（加载速度过快，一秒内完成，需要加上索引才能唯一化）
+						string overlayId = dirName + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "_" + index;
 
 						//添加node节点
-						string nodeText = Path.GetFileName(imageDir) + "_POS";
+						string nodeText = dirName + "_POS_" + index;
 						Tools.addChildNode(this.treeView.Nodes[0], overlayId, nodeText);
 
 						//新建POS图层
@@ -538,7 +544,7 @@ namespace GIS_Toolbox
 								double y = double.Parse(temp[1]);
 
 								//图片路径
-								string imageFile = imageDir + "\\" + temp[0];
+								string imageFile = Path.Combine(imageDir, temp[0]);
 
 								//检测图片是否存在，不存在则不添加marker
 								if (File.Exists(imageFile))

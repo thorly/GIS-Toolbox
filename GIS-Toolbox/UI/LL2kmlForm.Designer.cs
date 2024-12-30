@@ -67,7 +67,7 @@
 			// 
 			this.buttonImportFile.Location = new System.Drawing.Point(28, 33);
 			this.buttonImportFile.Name = "buttonImportFile";
-			this.buttonImportFile.Size = new System.Drawing.Size(141, 34);
+			this.buttonImportFile.Size = new System.Drawing.Size(136, 34);
 			this.buttonImportFile.TabIndex = 1;
 			this.buttonImportFile.Text = "导入文本文件";
 			this.buttonImportFile.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
 			this.groupBoxSeparator.Size = new System.Drawing.Size(859, 87);
 			this.groupBoxSeparator.TabIndex = 2;
 			this.groupBoxSeparator.TabStop = false;
-			this.groupBoxSeparator.Text = "导入设置";
+			this.groupBoxSeparator.Text = "导入";
 			// 
 			// label4
 			// 
@@ -177,13 +177,13 @@
 			this.groupBox1.Size = new System.Drawing.Size(859, 87);
 			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "导出设置";
+			this.groupBox1.Text = "导出";
 			// 
 			// buttonExportKml
 			// 
-			this.buttonExportKml.Location = new System.Drawing.Point(687, 33);
+			this.buttonExportKml.Location = new System.Drawing.Point(704, 33);
 			this.buttonExportKml.Name = "buttonExportKml";
-			this.buttonExportKml.Size = new System.Drawing.Size(141, 34);
+			this.buttonExportKml.Size = new System.Drawing.Size(124, 34);
 			this.buttonExportKml.TabIndex = 4;
 			this.buttonExportKml.Text = "导出kml文件";
 			this.buttonExportKml.UseVisualStyleBackColor = true;

@@ -102,9 +102,9 @@
 			this.checkBoxFirstLine.AutoSize = true;
 			this.checkBoxFirstLine.Location = new System.Drawing.Point(827, 55);
 			this.checkBoxFirstLine.Name = "checkBoxFirstLine";
-			this.checkBoxFirstLine.Size = new System.Drawing.Size(142, 22);
+			this.checkBoxFirstLine.Size = new System.Drawing.Size(106, 22);
 			this.checkBoxFirstLine.TabIndex = 4;
-			this.checkBoxFirstLine.Text = "是否跳过首行";
+			this.checkBoxFirstLine.Text = "跳过首行";
 			this.checkBoxFirstLine.UseVisualStyleBackColor = true;
 			// 
 			// buttonMerge
