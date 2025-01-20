@@ -18,8 +18,9 @@ using GMapDrawTools;
 using System.ComponentModel;
 using IxMilia.Dxf;
 using IxMilia.Dxf.Entities;
-using System.Text.Json;
 using GIS_Toolbox.UI;
+using LiteDB;
+using SharpKml.Dom;
 
 
 namespace GIS_Toolbox
@@ -32,7 +33,7 @@ namespace GIS_Toolbox
 		private static readonly string kmlFolder = Path.Combine(gisFolder, "kml");
 
 		//存储kml对应的信息
-		private static readonly string kmlJsonFile = Path.Combine(kmlFolder, "kml.json");
+		private static readonly string dbFile = Path.Combine(kmlFolder, "kmlInfo.db");
 
 		public MainForm()
 		{
@@ -76,36 +77,27 @@ namespace GIS_Toolbox
 				System.IO.Directory.CreateDirectory(kmlFolder);
 			}
 
-			//创建一个json文件
-			if (!File.Exists(kmlJsonFile))
+			using (var db = new LiteDatabase(dbFile))
 			{
-				FileInfo outputFile = new FileInfo(kmlJsonFile);
-				StreamWriter sw = outputFile.CreateText();
-				sw.Close();
-			}
+				var lst = db.GetCollection<KmlClass>();
+				List<KmlClass> list = lst.FindAll().ToList<KmlClass>();
 
-			//读取json
-			string jsonString = File.ReadAllText(kmlJsonFile);
-			if (jsonString != "")
-			{
-				List<KmlJson> kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-
-				foreach(KmlJson json in kmlJsonList)
+				for (int i = 0; i < list.Count; i++)
 				{
-					GMapOverlay kmlOverlay = new GMapOverlay(json.overlayId);
+					GMapOverlay kmlOverlay = new GMapOverlay(list[i].OverlayId);
 					this.gMapControl.Overlays.Add(kmlOverlay);
 
 					//读取kml并导入
-					List<KmlPlaceMark> placeMarks = KmlUtil.GetPlaceMarksFromKmlFile(json.kmlPath);
+					List<KmlPlaceMark> placeMarks = KmlUtil.GetPlaceMarksFromKmlFile(list[i].KmlPath);
 
-					GMarkerGoogleType markerType = ImportKmlProForm.MarkerTypeDict[json.markerTypeIndex];
-					Color lineColor = ImportKmlProForm.LineColorDict[json.colorIndex];
-					bool showToolTip = json.showToolTip;
+					GMarkerGoogleType markerType = list[i].MarkerType;
+					Color lineColor = list[i].Color;
+					bool showToolTip = list[i].ShowToolTip;
 
 					DrawPlaceMark(kmlOverlay, placeMarks, showToolTip, markerType, lineColor);
 
 					//添加node节点
-					Tools.addChildNode(this.treeView.Nodes[0], json.overlayId, json.nodeText);
+					Tools.addChildNode(this.treeView.Nodes[0], list[i].OverlayId, list[i].NodeText);
 				}
 			}
 		}
@@ -241,6 +233,10 @@ namespace GIS_Toolbox
 							this.gMapControl.Overlays.Remove(overlay);
 						}
 					}
+					else
+					{
+						MessageBox.Show($"图片{item.ToolTipText}不存在", "提示");
+					}
 				}
 			}
 		}
@@ -361,33 +357,33 @@ namespace GIS_Toolbox
 					string outKml = Path.Combine(kmlFolder, overlayId + ".kml");
 					Tools.SaveKmlFile(kmlOverlay, outKml);
 
-					//新建一个json
-					KmlJson json = new KmlJson()
-					{
-						kmlPath = outKml,
-						overlayId = overlayId,
-						nodeText = Path.GetFileName(fileName),
-						markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
-						colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, lineColor),
-						showToolTip = false
-					};
+					////新建一个json
+					//KmlJson json = new KmlJson()
+					//{
+					//	kmlPath = outKml,
+					//	overlayId = overlayId,
+					//	nodeText = Path.GetFileName(fileName),
+					//	markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
+					//	colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, lineColor),
+					//	showToolTip = false
+					//};
 
-					//读取json
-					string jsonString = File.ReadAllText(kmlJsonFile);
+					////读取json
+					//string jsonString = File.ReadAllText(kmlJsonFile);
 
-					List<KmlJson> kmlJsonList = new List<KmlJson>();
+					//List<KmlJson> kmlJsonList = new List<KmlJson>();
 
-					if (jsonString != "")
-					{
-						kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-					}
-					kmlJsonList.Add(json);
+					//if (jsonString != "")
+					//{
+					//	kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
+					//}
+					//kmlJsonList.Add(json);
 
-					//写入文件
-					using (var writer = File.CreateText(kmlJsonFile))
-					{
-						writer.Write(JsonSerializer.Serialize(kmlJsonList));
-					}
+					////写入文件
+					//using (var writer = File.CreateText(kmlJsonFile))
+					//{
+					//	writer.Write(JsonSerializer.Serialize(kmlJsonList));
+					//}
 				}
 			}
 		}
@@ -437,33 +433,33 @@ namespace GIS_Toolbox
 					string outKml = Path.Combine(kmlFolder, overlayId + ".kml");
 					Tools.SaveKmlFile(kmlOverlay, outKml);
 
-					//新建一个json
-					KmlJson json = new KmlJson()
-					{
-						kmlPath = outKml,
-						overlayId = overlayId,
-						nodeText = Path.GetFileName(fileName),
-						markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
-						colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, lineColor),
-						showToolTip = showToolTip
-					};
+					////新建一个json
+					//KmlJson json = new KmlJson()
+					//{
+					//	kmlPath = outKml,
+					//	overlayId = overlayId,
+					//	nodeText = Path.GetFileName(fileName),
+					//	markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
+					//	colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, lineColor),
+					//	showToolTip = showToolTip
+					//};
 
-					//读取json
-					string jsonString = File.ReadAllText(kmlJsonFile);
+					////读取json
+					//string jsonString = File.ReadAllText(kmlJsonFile);
 
-					List<KmlJson> kmlJsonList = new List<KmlJson>();
+					//List<KmlJson> kmlJsonList = new List<KmlJson>();
 
-					if (jsonString != "")
-					{
-						kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-					}
-					kmlJsonList.Add(json);
+					//if (jsonString != "")
+					//{
+					//	kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
+					//}
+					//kmlJsonList.Add(json);
 
-					//写入文件
-					using (var writer = File.CreateText(kmlJsonFile))
-					{
-						writer.Write(JsonSerializer.Serialize(kmlJsonList));
-					}
+					////写入文件
+					//using (var writer = File.CreateText(kmlJsonFile))
+					//{
+					//	writer.Write(JsonSerializer.Serialize(kmlJsonList));
+					//}
 				}
 			}
 		}
@@ -572,32 +568,22 @@ namespace GIS_Toolbox
 						string outKml = Path.Combine(kmlFolder, overlayId + ".kml");
 						Tools.SaveKmlFile(pointMarkers, outKml);
 
-						//新建一个json
-						KmlJson json = new KmlJson()
+						//写入数据库
+						using (var db = new LiteDatabase(dbFile))
 						{
-							kmlPath = outKml,
-							overlayId = overlayId,
-							nodeText = nodeText,
-							markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
-							colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, Color.Red),
-							showToolTip = false
-						};
+							var lst = db.GetCollection<KmlClass>();
 
-						//读取json
-						string jsonString = File.ReadAllText(kmlJsonFile);
+							KmlClass kml = new KmlClass
+							{
+								KmlPath = outKml,
+								OverlayId = overlayId,
+								NodeText = nodeText,
+								MarkerType = markerType,
+								Color = Color.Red,
+								ShowToolTip = false
+							};
 
-						List<KmlJson> kmlJsonList = new List<KmlJson>();
-
-						if (jsonString != "")
-						{
-							kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-						}
-						kmlJsonList.Add(json);
-
-						//写入文件
-						using (var writer = File.CreateText(kmlJsonFile))
-						{
-							writer.Write(JsonSerializer.Serialize(kmlJsonList));
+							lst.Insert(kml);
 						}
 					}
 					else
@@ -675,32 +661,22 @@ namespace GIS_Toolbox
 				string outKml = Path.Combine(kmlFolder, overlayId + ".kml");
 				Tools.SaveKmlFile(pointMarkers, outKml);
 
-				//新建一个json
-				KmlJson json = new KmlJson()
+				//写入数据库
+				using (var db = new LiteDatabase(dbFile))
 				{
-					kmlPath = outKml,
-					overlayId = overlayId,
-					nodeText = nodeText,
-					markerTypeIndex = Tools.FindKeyUsingMarkerType(ImportKmlProForm.MarkerTypeDict, markerType),
-					colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, Color.Red),
-					showToolTip = false
-				};
+					var lst = db.GetCollection<KmlClass>();
 
-				//读取json
-				string jsonString = File.ReadAllText(kmlJsonFile);
+					KmlClass kml = new KmlClass
+					{
+						KmlPath = outKml,
+						OverlayId = overlayId,
+						NodeText = nodeText,
+						MarkerType = markerType,
+						Color = Color.Red,
+						ShowToolTip = false
+					};
 
-				List<KmlJson> kmlJsonList = new List<KmlJson>();
-
-				if (jsonString != "")
-				{
-					kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-				}
-				kmlJsonList.Add(json);
-
-				//写入文件
-				using (var writer = File.CreateText(kmlJsonFile))
-				{
-					writer.Write(JsonSerializer.Serialize(kmlJsonList));
+					lst.Insert(kml);
 				}
 			}
 		}
@@ -1047,36 +1023,22 @@ namespace GIS_Toolbox
 					this.gMapControl.Overlays.Remove(overlay);
 					this.treeView.Nodes[0].Nodes.RemoveByKey(overlay.Id);
 
-					//读取json
-					string jsonString = File.ReadAllText(kmlJsonFile);
-
-					List<KmlJson> kmlJsonList = new List<KmlJson>();
-
-					if (jsonString != "")
+					//查找并删除
+					using (var db = new LiteDatabase(dbFile))
 					{
-						kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-					}
+						var lst = db.GetCollection<KmlClass>();
 
-					List<KmlJson> kmlJsonList2 = new List<KmlJson>();
-					kmlJsonList.ForEach(i => kmlJsonList2.Add(i));
+						//查找
+						KmlClass kml = lst.FindOne(x => x.OverlayId == overlay.Id);
 
-					foreach (KmlJson kml in kmlJsonList)
-					{
-						if (kml.overlayId == overlay.Id)
+						//删除数据库记录
+						lst.Delete(kml.Id);
+
+						//删除文件
+						if (File.Exists(kml.KmlPath))
 						{
-							if (File.Exists(kml.kmlPath))
-							{
-								File.Delete(kml.kmlPath);
-							}
-
-							kmlJsonList2.Remove(kml);
+							File.Delete(kml.KmlPath);
 						}
-					}
-
-					//写入文件
-					using (var writer = File.CreateText(kmlJsonFile))
-					{
-						writer.Write(JsonSerializer.Serialize(kmlJsonList2));
 					}
 				}
 			}
@@ -1159,32 +1121,22 @@ namespace GIS_Toolbox
 						string outKml = Path.Combine(kmlFolder, polygonName + ".kml");
 						Tools.SaveKmlFile(polygonOverlay, outKml);
 
-						//新建一个json
-						KmlJson json = new KmlJson()
+						//写入数据库
+						using (var db = new LiteDatabase(dbFile))
 						{
-							kmlPath = outKml,
-							overlayId = polygonName,
-							nodeText = polygonName,
-							markerTypeIndex = 0,
-							colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, Color.Blue),
-							showToolTip = false
-						};
+							var lst = db.GetCollection<KmlClass>();
 
-						//读取json
-						string jsonString = File.ReadAllText(kmlJsonFile);
+							KmlClass kml = new KmlClass
+							{
+								KmlPath = outKml,
+								OverlayId = polygonName,
+								NodeText = polygonName,
+								MarkerType = GMarkerGoogleType.blue_small,
+								Color = Color.Blue,
+								ShowToolTip = false
+							};
 
-						List<KmlJson> kmlJsonList = new List<KmlJson>();
-
-						if (jsonString != "")
-						{
-							kmlJsonList = JsonSerializer.Deserialize<List<KmlJson>>(jsonString);
-						}
-						kmlJsonList.Add(json);
-
-						//写入文件
-						using (var writer = File.CreateText(kmlJsonFile))
-						{
-							writer.Write(JsonSerializer.Serialize(kmlJsonList));
+							lst.Insert(kml);
 						}
 
 						break;
@@ -1203,32 +1155,22 @@ namespace GIS_Toolbox
 						string outKml2 = Path.Combine(kmlFolder, routeName + ".kml");
 						Tools.SaveKmlFile(routeOverlay, outKml2);
 
-						//新建一个json
-						KmlJson json2 = new KmlJson()
+						//写入数据库
+						using (var db = new LiteDatabase(dbFile))
 						{
-							kmlPath = outKml2,
-							overlayId = routeName,
-							nodeText = routeName,
-							markerTypeIndex = 0,
-							colorIndex = Tools.FindKeyUsingColor(ImportKmlProForm.LineColorDict, Color.Blue),
-							showToolTip = false
-						};
+							var lst = db.GetCollection<KmlClass>();
 
-						//读取json
-						string jsonString2 = File.ReadAllText(kmlJsonFile);
+							KmlClass kml = new KmlClass
+							{
+								KmlPath = outKml2,
+								OverlayId = routeName,
+								NodeText = routeName,
+								MarkerType = GMarkerGoogleType.blue_small,
+								Color = Color.Blue,
+								ShowToolTip = false
+							};
 
-						List<KmlJson> kmlJsonList2 = new List<KmlJson>();
-
-						if (jsonString2 != "")
-						{
-							kmlJsonList2 = JsonSerializer.Deserialize<List<KmlJson>>(jsonString2);
-						}
-						kmlJsonList2.Add(json2);
-
-						//写入文件
-						using (var writer = File.CreateText(kmlJsonFile))
-						{
-							writer.Write(JsonSerializer.Serialize(kmlJsonList2));
+							lst.Insert(kml);
 						}
 
 						break;

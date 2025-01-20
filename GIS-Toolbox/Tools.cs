@@ -431,37 +431,6 @@ namespace GIS_Toolbox
 			return boundingPolygon;
 		}
 
-
-		public static int FindKeyUsingMarkerType(Dictionary<int, GMarkerGoogleType> markerTypeDict, GMarkerGoogleType makerType)
-		{
-			int k = 999;
-
-			foreach (int key in markerTypeDict.Keys)
-			{
-				if (markerTypeDict[key] == makerType)
-				{
-					k = key;
-				}
-			}
-
-			return k;
-		}
-
-		public static int FindKeyUsingColor(Dictionary<int, Color> lineColorDict, Color color)
-		{
-			int k = 999;
-
-			foreach (int key in lineColorDict.Keys)
-			{
-				if (lineColorDict[key] == color)
-				{
-					k = key;
-				}
-			}
-
-			return k;
-		}
-
 		public static void DeleteDirectory(string directory)
 		{
 			if (Directory.Exists(directory))

@@ -40,6 +40,9 @@
     <Reference Include="IxMilia.Dxf, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IxMilia.Dxf.0.8.4\lib\netstandard2.0\IxMilia.Dxf.dll</HintPath>
     </Reference>
+    <Reference Include="LiteDB, Version=5.0.21.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.5.0.21\lib\net45\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="MetadataExtractor, Version=2.8.1.0, Culture=neutral, PublicKeyToken=b66b5ccaf776c301, processorArchitecture=MSIL">
       <HintPath>..\packages\MetadataExtractor.2.8.1\lib\net45\MetadataExtractor.dll</HintPath>
     </Reference>
@@ -99,6 +102,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KmlClass.cs" />
     <Compile Include="UI\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,7 +147,6 @@
     <Compile Include="UI\ImportKmlProForm.Designer.cs">
       <DependentUpon>ImportKmlProForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="KmlJson.cs" />
     <Compile Include="UI\LL2kmlForm.cs">
       <SubType>Form</SubType>
     </Compile>

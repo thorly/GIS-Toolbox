@@ -69,8 +69,8 @@
 			this.DeleteLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToDxfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ZoomToLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
+			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -275,7 +275,7 @@
 			// 
 			this.整理Lidar数据ToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.整理;
 			this.整理Lidar数据ToolStripMenuItem.Name = "整理Lidar数据ToolStripMenuItem";
-			this.整理Lidar数据ToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.整理Lidar数据ToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
 			this.整理Lidar数据ToolStripMenuItem.Text = "整理华测Lidar数据";
 			this.整理Lidar数据ToolStripMenuItem.Click += new System.EventHandler(this.整理Lidar数据ToolStripMenuItem_Click);
 			// 
@@ -283,7 +283,7 @@
 			// 
 			this.DeleteFilesToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.删除;
 			this.DeleteFilesToolStripMenuItem.Name = "DeleteFilesToolStripMenuItem";
-			this.DeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.DeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
 			this.DeleteFilesToolStripMenuItem.Text = "删除指定扩展名文件";
 			this.DeleteFilesToolStripMenuItem.Click += new System.EventHandler(this.DeleteFilesToolStripMenuItem_Click);
 			// 
@@ -291,7 +291,7 @@
 			// 
 			this.ExtractColumnToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.列;
 			this.ExtractColumnToolStripMenuItem.Name = "ExtractColumnToolStripMenuItem";
-			this.ExtractColumnToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.ExtractColumnToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
 			this.ExtractColumnToolStripMenuItem.Text = "提取某几列数据";
 			this.ExtractColumnToolStripMenuItem.Click += new System.EventHandler(this.ExtractColumnToolStripMenuItem_Click);
 			// 
@@ -307,7 +307,7 @@
 			// 
 			this.SplitFeimaCameraToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.分离;
 			this.SplitFeimaCameraToolStripMenuItem.Name = "SplitFeimaCameraToolStripMenuItem";
-			this.SplitFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.SplitFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
 			this.SplitFeimaCameraToolStripMenuItem.Text = "飞马无人机照片分架次处理";
 			this.SplitFeimaCameraToolStripMenuItem.Click += new System.EventHandler(this.SplitFeimaCameraToolStripMenuItem_Click);
 			// 
@@ -315,7 +315,7 @@
 			// 
 			this.UniqueFeimaCameraToolStripMenuItem.Image = global::GIS_Toolbox.Properties.Resources.一对一;
 			this.UniqueFeimaCameraToolStripMenuItem.Name = "UniqueFeimaCameraToolStripMenuItem";
-			this.UniqueFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(336, 34);
+			this.UniqueFeimaCameraToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
 			this.UniqueFeimaCameraToolStripMenuItem.Text = "飞马无人机照片唯一化处理";
 			this.UniqueFeimaCameraToolStripMenuItem.Click += new System.EventHandler(this.UniqueFeimaCameraToolStripMenuItem_Click);
 			// 
